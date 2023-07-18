@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
@@ -36,22 +36,22 @@ Route::get('/error', function () {
 
 
 //News
-Route::prefix('news')->group(function () {
-    Route::get('/' , [NewsController::class,'index'])->name('News.index');
-    Route::get('/archive' , [NewsController::class,'archive'])->name('News.archive');
-    Route::get('/create' , [NewsController::class, 'create'])->name('News.create');
-    Route::post('/store' , [NewsController::class, 'store'])->name('News.store');
-    Route::get('/show/{id}' , [NewsController::class,'show'])->name('News.show');
-    Route::get('/edit/{id}' , [NewsController::class,'edit'])->name('News.edit');
-    Route::post('/update/{id}' , [NewsController::class,'update'])->name('News.update');
-    Route::get('/destroy/{id}' , [NewsController::class,'soft_delete'])->name('News.soft_delete');
-    Route::get('/restore/{id}' , [NewsController::class,'restore'])->name('News.restore');
-    Route::get('/delete/{id}' , [NewsController::class,'hard_delete'])->name('News.hard_delete');
-    Route::get('/search', [NewsController::class, 'search'])->name('News.search');
-    Route::get('/archive_search', [NewsController::class, 'archive_search'])->name('News.archive_search');
-    Route::get('/title_search', [NewsController::class, 'title_search'])->name('News.title_search');
-    Route::get('/archive_title_search', [NewsController::class, 'archive_title_search'])->name('News.archive_title_search');
-    Route::post('/searchByDate', [NewsController::class, 'searchByDate'])->name('News.searchByDate');
+Route::prefix('products')->group(function () {
+    Route::get('/' , [ProductController::class,'index'])->name('Products.index');
+    Route::get('/archive' , [ProductController::class,'archive'])->name('Products.archive');
+    Route::get('/create' , [ProductController::class, 'create'])->name('Products.create');
+    Route::post('/store' , [ProductController::class, 'store'])->name('Products.store');
+    Route::get('/show/{id}' , [ProductController::class,'show'])->name('Products.show');
+    Route::get('/edit/{id}' , [ProductController::class,'edit'])->name('Products.edit');
+    Route::post('/update/{id}' , [ProductController::class,'update'])->name('Products.update');
+    Route::get('/destroy/{id}' , [ProductController::class,'soft_delete'])->name('Products.soft_delete');
+    Route::get('/restore/{id}' , [ProductController::class,'restore'])->name('Products.restore');
+    Route::get('/delete/{id}' , [ProductController::class,'hard_delete'])->name('Products.hard_delete');
+    Route::get('/search', [ProductController::class, 'search'])->name('Products.search');
+    Route::get('/archive_search', [ProductController::class, 'archive_search'])->name('Products.archive_search');
+    Route::get('/title_search', [ProductController::class, 'title_search'])->name('Products.title_search');
+    Route::get('/archive_title_search', [ProductController::class, 'archive_title_search'])->name('Products.archive_title_search');
+    Route::post('/searchByDate', [ProductController::class, 'searchByDate'])->name('Products.searchByDate');
 });
 
 

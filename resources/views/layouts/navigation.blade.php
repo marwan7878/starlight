@@ -1,7 +1,7 @@
 <input type="text" class="mySearch mx-auto d-block" id="mySearch" onkeyup="search(this.value)" placeholder="بحث" title="Type in a category">
 <ul>
 
-    <li class=" nav-item @if(request()->routeIs('News.index') || request()->routeIs('News.archive')) active @else noneactive @endif nav-item-has-children">
+    <li class=" nav-item @if(request()->routeIs('Products.index') || request()->routeIs('Products.archive')) active @else noneactive @endif nav-item-has-children">
         <a class="search collapsed"  data-bs-toggle="collapse" data-bs-target="#ddmenu_1"
         aria-controls="ddmenu_1" aria-expanded="true" aria-label="Toggle navigation">
             <span class="icon">
@@ -11,15 +11,15 @@
         </a>
         <ul id="ddmenu_1" class="dropdown-nav collapse">
             <li>
-                <a href="{{ route('News.index') }}">
+                <a href="{{ route('Products.index') }}">
                     <div class="ico w-fit"><i class="fa-solid fa-eye m-0" style="font-size: 14px"></i></div>
-                    عرض
+                    Show
                 </a>
             </li>
             <li>
-                <a href="{{ route('News.create') }}">
+                <a href="{{ route('Products.create') }}">
                     <div class="ico w-fit"><i class="fa-solid fa-plus m-0" style="font-size: 14px"></i></div>
-                    اضافة
+                    Add
                 </a>
             </li>
         </ul>

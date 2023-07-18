@@ -4,9 +4,9 @@
 
 <div class="p-3">
   <div class="three mb-3 d-flex justify-content-between align-items-center">
-    <h1 class="d-inline-block " style="width: 100px">الاخبار</h1>
+    <h1 class="d-inline-block " style="width: 100px">Products</h1>
     
-    <form class="display: flex;justify-content: center;align-items: center;" id="search-form" action="{{route('News.title_search')}}" method="get">
+    <form class="display: flex;justify-content: center;align-items: center;" id="search-form" action="{{route('Products.title_search')}}" method="get">
       <input class="mySearch" style="width:10rem;" type="text" name="title" id="search-input" placeholder="ادخل عنوان...">
       <button class="btn btn-outline-secondary py-1" style="border-radius: 12px"  type="submit"><b>بحث</b></button>
     </form>
