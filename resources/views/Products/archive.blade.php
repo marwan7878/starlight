@@ -56,10 +56,10 @@
         </tbody>
     </table>
     <div class="pagination justify-content-center">
-      {{$news->links()}}
+      {{$products->links()}}
     </div>
     @else
-    <div class="alert alert-danger fw-bold" role="alert">لا يوجد اخبار</div>
+    <div class="alert alert-danger fw-bold" role="alert">لا يوجد منتجات</div>
     @endif
 </div>
 @endsection
