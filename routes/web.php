@@ -165,6 +165,7 @@ Route::group(['middleware' => 'auth.admin'], function () {
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::post('update_role/{id}', [UserController::class, 'update_role'])->name('update_role');
 });
+Route::post('/toggle', [UserController::class, 'toggle'])->name('toggle');
 
 //meta data
 Route::prefix('metadata')->group(function () {

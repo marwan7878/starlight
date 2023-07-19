@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -29,5 +30,11 @@ class UserController extends Controller
         }
         $user->save();
         return redirect();
+    }
+
+    public function toggle(Request $request)
+    {
+        // Handle the checkbox toggle logic here
+        return response()->json(['status' => 'success']);
     }
 }

@@ -33,7 +33,6 @@ class OrderController extends Controller
     public function soft_delete($id)
     {
         $order = Order::find($id);
-        // dd($order);
         $order->delete();
         return redirect()->back();
     }

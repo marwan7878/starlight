@@ -12,7 +12,6 @@ class ApiContactUsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'company_name' => 'required',
             'first_name' => 'required',
             'second_name' => 'required',
             'email' => 'required',
@@ -20,7 +19,6 @@ class ApiContactUsController extends Controller
             'message' => 'required'
         ]);
         $ret = ContactUs::create([
-            'company_name' => $request->company_name,
             'first_name' => $request->first_name,
             'second_name' => $request->second_name,
             'email' => $request->email,

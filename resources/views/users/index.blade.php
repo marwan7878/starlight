@@ -3,6 +3,7 @@
 @section('content')
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
     <!-- ========== title-wrapper start ========== -->
     <div class="title-wrapper pt-30">
@@ -46,9 +47,9 @@
                                     <p>{{ $user->email }}</p>
                                 </td>
                                 <td>
-                                    <meta name="csrf-token" content="{{ csrf_token() }}">
+                                    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 
-                                    <input type="checkbox" id="myCheckbox" value="{{$user->id}}" onchange="myCheckbox()" name="myCheckbox">
+                                    {{-- <input type="checkbox" id="myCheckbox" value="{{$user->id}}" onchange="myCheckbox()" name="myCheckbox"> --}}
                                     
                                 </td>
                                 
@@ -65,33 +66,81 @@
             </div>
         </div>
     </div>
+
+    <input type="checkbox" id="myCheckbox" />
+<label for="myCheckbox">Toggle</label>
+<div id="result"></div>
 @endsection
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 {{-- <script type="text/javascript"> --}}
 <script>
     
-    function myCheckbox(){
-        var id = document.getElementById('myCheckbox').value;
-        var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+//     function myCheckbox(){
+//         var id = document.getElementById('myCheckbox').value;
+//         // var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        console.log(id);
+//         console.log(id);
+//         $.ajaxSetup({
+//     headers: {
+//         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//     }
+// });
+//         $.ajax({
+//             url: '/update_role/'+id,
+//             method: 'POST',
+//             data:{id:id},
+//             // csrf_token: csrfToken,
+            
+//             success: function (response) {
+//                 // Handle the response (if needed)
+//                 console.log(response);
+//             },
+//             error: function (xhr) {
+//                 // Handle any errors (if needed)
+//                 console.error(xhr);
+//             }
+        
+//             // success: function(response) {
+//             //     alert(response);
+//             //     console.log(response);
+//             // },
+//         })
+        
+//     }
+
+
+    $(document).ready(function() {
+    $('#myCheckbox').change(function() {
+        var isChecked = $(this).prop('checked');
         
         $.ajax({
-            type: 'POST',
-            url: '/update_role/'+id,
-            csrf_token: csrfToken,
-            
-        
-            success: function(response) {
-                alert(response);
-                console.log(response);
+            url: "{{ route('toggle') }}",
+            method: "POST",
+            data: {
+                isChecked: isChecked,
+                _token: "{{ csrf_token() }}"
             },
-        })
-        
-    }
 
-</script>  
+            success: function(response) {
+                $('#result').html(response.status);
+                console.log(response.status);
+            },
+            error: function(xhr) {
+                $('#result').html('An error occurred.');
+                console.log(xhr);
+
+            }
+        });
+    });
+});
+</script>
+
+
+
+
+ 
 

@@ -37,13 +37,13 @@
             <li>
                 <a href="{{ route('category.index') }}">
                     <div class="ico w-fit"><i class="fa-solid fa-eye m-0" style="font-size: 14px"></i></div>
-                    عرض
+                    Show
                 </a>
             </li>
             <li>
                 <a href="{{ route('category.create') }}">
                     <div class="ico w-fit"><i class="fa-solid fa-plus m-0" style="font-size: 14px"></i></div>
-                    اضافة
+                    Add
                 </a>
             </li>
         </ul>

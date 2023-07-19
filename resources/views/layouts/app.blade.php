@@ -15,9 +15,9 @@
     <link rel="stylesheet" href="{{ asset('css/lineicons.css') }}"/>
     @vite('resources/sass/app.scss')
 </head>
-<body>
+<body dir="ltr">
 <!-- ======== sidebar-nav start =========== -->
-<aside class="sidebar-nav-wrapper" style="right: 0 !important; position: fixed !important;">
+<aside class="sidebar-nav-wrapper" style="left: 0 !important; position: fixed !important;">
     <div class="navbar-logo">
         <a href="{{ route('home') }}">
             <img src="{{ asset('images/logo/elkenany.png') }}" style="width: 70px" alt="logo"/>
@@ -31,7 +31,8 @@
 <!-- ======== sidebar-nav end =========== -->
 
 <!-- ======== main-wrapper start =========== -->
-<main class="main-wrapper">
+<main class="main-wrapper" style="margin-left: 250px;
+margin-right: 0px;">
     <!-- ========== header start ========== -->
     <header class="header py-3 sticky-top">
         <div class="container-fluid">

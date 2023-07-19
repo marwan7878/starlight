@@ -64,7 +64,7 @@ Route::prefix('infos')->group(function () {
 });
 
 // //contactus
-// Route::post('order/store' , [ApiContactUsController::class,'store']);
+Route::post('contactus/store' , [ApiContactUsController::class,'store']);
 
 //order
 Route::post('order/store' , [ApiOrderController::class,'store']);
