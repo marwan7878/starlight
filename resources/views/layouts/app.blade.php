@@ -40,7 +40,7 @@
                     <div class="header-left d-flex align-items-center">
                         <div class="menu-toggle-btn mr-20">
                             <button id="menu-toggle" class="main-btn primary-btn btn-hover">
-                                <i class="lni lni-chevron-right me-2 pl-5"></i> القائمة
+                                <i class="lni lni-chevron-right me-2 pl-5"></i> Menu
                             </button>
                         </div>
                     </div>

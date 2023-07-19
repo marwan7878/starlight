@@ -22,16 +22,16 @@ class InfoController extends Controller
     }
     public function create()
     {
-        $types = ['--لا شئ--' , 'عنوان' , 'ايميل' , 'رقم تليفون' ];
+        $types = ['--none--' , 'address' , 'email' , 'phone'];
         return view('Info.create',compact('types'));
     }
     
     public function store(Request $request)
     {
-        $types = ['--لا شئ--' , 'عنوان' , 'ايميل' , 'رقم تليفون' ];
+        $types = ['--none--' , 'address' , 'email' , 'phone'];
         if($request->type_index == 0)
         {
-            return redirect()->back()->withErrors(['msg' => 'من فضلك اختر النوع!']);
+            return redirect()->back()->withErrors(['msg' => 'Please ,select type']);
         }
         else
         {

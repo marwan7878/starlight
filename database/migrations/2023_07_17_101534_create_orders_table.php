@@ -15,9 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone');
-            $table->string('city');
+            $table->string('email');
             $table->string('commodity');
             $table->boolean('read')->default(false);
             $table->softDeletes();

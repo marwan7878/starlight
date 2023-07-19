@@ -85,11 +85,11 @@
             <li>
                 <a href="{{route('Events.index')}}">
                     <div class="ico w-fit"><i class="fa-solid fa-eye m-0" style="font-size: 14px"></i></div>
-                    عرض
+                    Show
                 </a>
                 <a href="{{route('Events.create')}}">
                     <div class="ico w-fit"><i class="fa-solid fa-plus m-0" style="font-size: 14px"></i></div>
-                    اضافة
+                    Add
                 </a>
             </li>
             <li>
@@ -109,13 +109,13 @@
             <li>
                 <a href="{{ route('info.index') }}">
                     <div class="ico w-fit"><i class="fa-solid fa-eye m-0" style="font-size: 14px"></i></div>
-                    عرض
+                    Show
                 </a>
             </li>
             <li>
                 <a href="{{ route('info.create') }}">
                     <div class="ico w-fit"><i class="fa-solid fa-plus m-0" style="font-size: 14px"></i></div>
-                    اضافة
+                    Add
                 </a>
             </li>
         </ul>
