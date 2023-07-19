@@ -63,8 +63,8 @@ Route::prefix('infos')->group(function () {
     Route::get('/search/{id}', [ApiInfoController::class, 'show']);
 });
 
-//contactus
-Route::post('contactus/store' , [ApiContactUsController::class,'store']);
+// //contactus
+// Route::post('order/store' , [ApiContactUsController::class,'store']);
 
 //order
 Route::post('order/store' , [ApiOrderController::class,'store']);

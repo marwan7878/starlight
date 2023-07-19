@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('email');
-            $table->string('commodity');
+            $table->string('product');
+            $table->string('message');
             $table->boolean('read')->default(false);
             $table->softDeletes();
             $table->timestamps();

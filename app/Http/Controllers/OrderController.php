@@ -22,16 +22,18 @@ class OrderController extends Controller
     public function show($id)
     {
         $order = Order::where('id' , $id)->first();
+        if($order == null)
+            $order = Order::withTrashed()->where('id' , $id)->first();
+        
         $order->read = '1';
         $order->save();
         return view('Orders.show')->with('order' , $order); 
     }
     
-    
-
     public function soft_delete($id)
     {
         $order = Order::find($id);
+        // dd($order);
         $order->delete();
         return redirect()->back();
     }
@@ -43,9 +45,9 @@ class OrderController extends Controller
         return redirect()->back();
     }
 
-    public function hardDelete($id)
+    public function hard_delete($id)
     {
-        $order = Order::find($id);
+        $order = Order::onlyTrashed()->find($id);
         $order->forceDelete();
         return redirect()->back();
     }
