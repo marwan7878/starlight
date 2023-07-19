@@ -2,40 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Job;
+use App\Models\Event;
 use Illuminate\Http\Request;
 
-class JobController extends Controller
+class EventController extends Controller
 {
     public function index()
     {
-        $jobs = Job::latest()->paginate(10);
-        return view('Jobs.index')->with('jobs' , $jobs);
+        $events = Event::latest()->paginate(10);
+        return view('Events.index')->with('events' , $events);
     }
 
     public function archive()
     {
-        $jobs = Job::latest()->onlyTrashed()->paginate(10);
-        return view('Jobs.archive')->with('jobs',$jobs);
+        $events = Event::latest()->onlyTrashed()->paginate(10);
+        return view('Events.archive')->with('events',$events);
     }
 
-    
     public function create()
     {
-        return view('Jobs.create');
+        return view('Events.create');
     }
 
     public function store(Request $request)
     {
         $this->validate($request,[
             'title'=>'required',
-            'address'=>'required',
             'description'=>'required',
+            'image'=>'required',
         ]);
         Job::create([
             'title'=>$request->title,
-            'address'=>$request->address,
             'description'=>$request->description,
+            'image'=>$request->image,
             'alt_text'=> $request->alt_text,
             'focus_keyword'=> $request->focus_keyword,
 

@@ -49,7 +49,7 @@
         </ul>
     </li>
     
-    <li class=" nav-item @if(request()->routeIs('Articles.index') || request()->routeIs('Articles.archive')) active @else noneactive @endif nav-item-has-children">
+    {{-- <li class=" nav-item @if(request()->routeIs('Articles.index') || request()->routeIs('Articles.archive')) active @else noneactive @endif nav-item-has-children">
         <a class="search collapsed" class="" data-bs-toggle="collapse" data-bs-target="#ddmenu_3"
            aria-controls="ddmenu_3" aria-expanded="true" aria-label="Toggle navigation">
             <span class="icon">
@@ -71,9 +71,9 @@
             <li>
             </li>
         </ul>
-    </li>
+    </li> --}}
         
-    <li class=" nav-item @if(request()->routeIs('Jobs.index') || request()->routeIs('Jobs.archive')) active @else noneactive @endif nav-item-has-children">
+    <li class=" nav-item @if(request()->routeIs('Events.index') || request()->routeIs('Events.archive')) active @else noneactive @endif nav-item-has-children">
         <a class="search collapsed" class="" data-bs-toggle="collapse" data-bs-target="#ddmenu_4"
            aria-controls="ddmenu_4" aria-expanded="true" aria-label="Toggle navigation">
             <span class="icon">
@@ -83,11 +83,11 @@
         </a>
         <ul id="ddmenu_4" class="dropdown-nav collapse" style="">
             <li>
-                <a href="{{route('Jobs.index')}}">
+                <a href="{{route('Events.index')}}">
                     <div class="ico w-fit"><i class="fa-solid fa-eye m-0" style="font-size: 14px"></i></div>
                     عرض
                 </a>
-                <a href="{{route('Jobs.create')}}">
+                <a href="{{route('Events.create')}}">
                     <div class="ico w-fit"><i class="fa-solid fa-plus m-0" style="font-size: 14px"></i></div>
                     اضافة
                 </a>

@@ -6,20 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    
-    public function up()
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
     {
-        Schema::create('jobs', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->text('title');
-            $table->text('address');
+            $table->string('title');
             $table->longtext('description');
+            $table->string('image');
             $table->string('alt_text')->nullable();
             $table->string('focus_keyword')->nullable();
             
             $table->string('social_title')->nullable();
-            $table->string('social_address')->nullable();
             $table->longtext('social_description')->nullable();
+            $table->string('social_image')->nullable();
             $table->string('social_alt_text')->nullable();
 
             $table->string('meta_title')->nullable();
@@ -31,9 +33,9 @@ return new class extends Migration
         });
     }
 
-
-    public function down()
+    
+    public function down(): void
     {
-        Schema::dropIfExists('jobs');
+        Schema::dropIfExists('events');
     }
 };

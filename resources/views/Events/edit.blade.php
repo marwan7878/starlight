@@ -6,30 +6,21 @@
   <div class="card-style-3 mb-30">
       <div class="card-content">            
           <div class="row">
-            <form action="{{route('Articles.update',$article->id)}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('Events.update',$event->id)}}" method="POST" enctype="multipart/form-data">
               @csrf
 
               <div class="col-12">
                 <div class="input-style-1">
                   <label for="title">العنوان</label>
-                  <input type="text" class="form-control" name="title" value="{{$article->title}}" oninput="countCharacters(this,1)">
+                  <input type="text" class="form-control" name="title" value="{{$event->title}}" oninput="countCharacters(this,1)">
                   <div dir="ltr"><span id="1"></span></div>
                 </div>
               </div>
-              <div class="col-12">
-                <div class="input-style-1">
-                  <label for="category_id">القسم</label>
-                  <select name="category_id" class="form-control w-25">
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name_ar }}</option>
-                    @endforeach
-                  </select>  
-                </div>
-              </div>
+              
               <div class="col-12">
                 <div class="input-style-1">
                   <label for="description">الوصف</label>
-                  <textarea name="description" id="textarea1" oninput="countCharacters(this,2)">{{$article->description}}</textarea>
+                  <textarea name="description" id="textarea1" oninput="countCharacters(this,2)">{{$event->description}}</textarea>
                   <div dir="ltr"><span id="2"></span></div>
                 </div>
               </div>
@@ -37,21 +28,21 @@
               <div class="col-12">
                 <div class="input-style-1">
                   <label for="name">الصورة</label>
-                  <img src="/images/main/articles/{{$article->image}}" alt="error" style="width: 200px">
+                  <img src="/images/main/events/{{$event->image}}" alt="error" style="width: 200px">
                   <input type="file" class="file" id="file" name="image">
                 </div>
               </div>
               <div class="col-12">
                 <div class="input-style-1">
                   <label for="alt_text" dir="ltr">Alt_text</label>
-                  <input type="text" class="form-control" name="alt_text" value="{{$article->alt_text}}" oninput="countCharacters(this,3)">
+                  <input type="text" class="form-control" name="alt_text" value="{{$event->alt_text}}" oninput="countCharacters(this,3)">
                   <div dir="ltr"><span id="3"></span></div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="input-style-1">
                   <label for="focus_word" dir="ltr">Focus_keyword</label>
-                  <input type="text" class="form-control" name="focus_keyword" value="{{$article->focus_keyword}}" oninput="countCharacters(this,4)">
+                  <input type="text" class="form-control" name="focus_keyword" value="{{$event->focus_keyword}}" oninput="countCharacters(this,4)">
                   <div dir="ltr"><span id="4"></span></div>
                 </div>
               </div>
@@ -64,22 +55,22 @@
               <div class="col-12">
                 <div class="input-style-1">
                   <label for="social_title" dir="ltr">Social_title</label>
-                  <input type="text" class="form-control" name="social_title" value="{{$article->social_title}}" oninput="countCharacters(this,15)">
+                  <input type="text" class="form-control" name="social_title" value="{{$event->social_title}}" oninput="countCharacters(this,15)">
                   <div dir="ltr"><span id="15"></span></div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="input-style-1">
                   <label for="social_description" dir="ltr">Social_description</label>
-                  <textarea type="text" class="form-control" rows="3" name="social_description" oninput="countCharacters(this,5)">{{$article->social_description}}</textarea>
+                  <textarea type="text" class="form-control" rows="3" name="social_description" oninput="countCharacters(this,5)">{{$event->social_description}}</textarea>
                   <div dir="ltr"><span id="5"></span></div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="input-style-1">
                   <label for="social_image" dir="ltr">Social_image</label>
-                  @if ($article->social_image != null)
-                    <img src="/images/social/articles/{{$article->social_image}}" alt="error" style="width: 200px">  
+                  @if ($event->social_image != null)
+                    <img src="/images/social/events/{{$event->social_image}}" alt="error" style="width: 200px">  
                   @endif
                   <input type="file" class="file" name="social_image">
                 </div>
@@ -87,7 +78,7 @@
               <div class="col-12">
                 <div class="input-style-1">
                   <label for="social_alt_text" dir="ltr">Social_alt_text</label>
-                  <input type="text" class="form-control" name="social_alt_text" value="{{$article->social_alt_text}}" oninput="countCharacters(this,6)">
+                  <input type="text" class="form-control" name="social_alt_text" value="{{$event->social_alt_text}}" oninput="countCharacters(this,6)">
                   <div dir="ltr"><span id="6"></span></div>
                 </div>
               </div>
@@ -100,14 +91,14 @@
               <div class="col-12">
                 <div class="input-style-1">
                   <label for="meta_title" dir="ltr">Title_tag</label>
-                  <input type="text" class="form-control" name="meta_title" value="{{$article->meta_title}}" oninput="countCharacters(this,7)">
+                  <input type="text" class="form-control" name="meta_title" value="{{$event->meta_title}}" oninput="countCharacters(this,7)">
                   <div dir="ltr"><span id="7"></span></div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="input-style-1">
                   <label for="meta_link" dir="ltr">Meta_link</label>
-                  <input type="text" class="form-control" dir="ltr" name="meta_link" value="{{$article->meta_link}}" oninput="countCharacters(this,8)">
+                  <input type="text" class="form-control" dir="ltr" name="meta_link" value="{{$event->meta_link}}" oninput="countCharacters(this,8)">
                   <div><span id="8"></span></div>
                 </div>
               </div>
@@ -115,14 +106,14 @@
               <div class="col-12">
                 <div class="input-style-1">
                   <label for="Meta_decription" dir="ltr">Meta_description</label>
-                  <textarea type="text" class="form-control" rows="3" name="meta_description" oninput="countCharacters(this,9)">{{$article->meta_description}}</textarea>
+                  <textarea type="text" class="form-control" rows="3" name="meta_description" oninput="countCharacters(this,9)">{{$event->meta_description}}</textarea>
                   <div dir="ltr"><span id="9"></span></div>
                 </div>
               </div>
 
               <div class="col-12">
                   <div class="button-group d-flex justify-content-center flex-wrap">
-                    <input class="main-btn primary-btn btn-hover w-25 text-center" type="submit" value="تعديل">
+                    <input class="main-btn primary-btn btn-hover w-25 text-center" type="submit" value="Update">
                   </div>
               </div>
               </div>

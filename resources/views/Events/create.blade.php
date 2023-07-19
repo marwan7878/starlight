@@ -6,29 +6,20 @@
   <div class="card-style-3 mb-30">
       <div class="card-content">            
           <div class="row">
-            <form action="{{route('Articles.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('Events.store')}}" method="POST" enctype="multipart/form-data">
               @csrf
 
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="title">العنوان</label>
+                  <label for="title">Title</label>
                   <input type="text" class="form-control" name="title" id="name" oninput="countCharacters(this,1)">
                   <div dir="ltr"><span id="1"></span></div>
                 </div>
               </div>
+              
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="category_id">القسم</label>
-                  <select name="category_id" class="form-control w-25">
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name_ar }}</option>
-                    @endforeach
-                  </select>  
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="input-style-1">
-                  <label for="description">الوصف</label>
+                  <label for="description">Description</label>
                   <textarea name="description" id="textarea1" oninput="countCharacters(this,2)"></textarea>
                   <div dir="ltr"><span id="2"></span></div>
                 </div>
@@ -36,7 +27,7 @@
               
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="name">الصورة</label>
+                  <label for="name">Image</label>
                   <input type="file" class="file" id="file" name="image">
                 </div>
               </div>
@@ -119,7 +110,7 @@
 
               <div class="col-12">
                   <div class="button-group d-flex justify-content-center flex-wrap">
-                    <input class="main-btn primary-btn btn-hover w-25 text-center" type="submit" value="اضافة">
+                    <input class="main-btn primary-btn btn-hover w-25 text-center" type="submit" value="Add">
                   </div>
               </div>
               </div>

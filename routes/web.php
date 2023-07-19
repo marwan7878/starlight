@@ -7,8 +7,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\JobController;
-use App\Http\Controllers\ArticleController;
+// use App\Http\Controllers\JobController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\MetaDataPagesController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\UserController;
@@ -55,22 +55,22 @@ Route::prefix('products')->group(function () {
 });
 
 
-//Articles
-Route::prefix('article')->group(function () {
-    Route::get('/' , [ArticleController::class,'index'])->name('Articles.index');
-    Route::get('/archive' , [ArticleController::class,'archive'])->name('Articles.archive');
-    Route::get('/create' , [ArticleController::class, 'create'])->name('Articles.create');
-    Route::post('/store' , [ArticleController::class, 'store'])->name('Articles.store');
-    Route::get('/show/{id}' , [ArticleController::class,'show'])->name('Articles.show');
-    Route::get('/edit/{id}' , [ArticleController::class,'edit'])->name('Articles.edit');
-    Route::post('/update/{id}' , [ArticleController::class,'update'])->name('Articles.update');
-    Route::get('/destroy/{id}' , [ArticleController::class,'soft_delete'])->name('Articles.soft_delete');
-    Route::get('/restore/{id}' , [ArticleController::class,'restore'])->name('Articles.restore');
-    Route::get('/delete/{id}' , [ArticleController::class,'hard_delete'])->name('Articles.hard_delete');
-    Route::get('/search', [ArticleController::class, 'search'])->name('Articles.search');
-    Route::get('/archive_search', [ArticleController::class, 'archive_search'])->name('Articles.archive_search');
-    Route::get('/title_search', [ArticleController::class, 'title_search'])->name('Articles.title_search');
-    Route::get('/archive_title_search', [ArticleController::class, 'archive_title_search'])->name('Articles.archive_title_search');
+//
+Route::prefix('event')->group(function () {
+    Route::get('/' , [EventController::class,'index'])->name('Events.index');
+    Route::get('/archive' , [EventController::class,'archive'])->name('Events.archive');
+    Route::get('/create' , [EventController::class, 'create'])->name('Events.create');
+    Route::post('/store' , [EventController::class, 'store'])->name('Events.store');
+    Route::get('/show/{id}' , [EventController::class,'show'])->name('Events.show');
+    Route::get('/edit/{id}' , [EventController::class,'edit'])->name('Events.edit');
+    Route::post('/update/{id}' , [EventController::class,'update'])->name('Events.update');
+    Route::get('/destroy/{id}' , [EventController::class,'soft_delete'])->name('Events.soft_delete');
+    Route::get('/restore/{id}' , [EventController::class,'restore'])->name('Events.restore');
+    Route::get('/delete/{id}' , [EventController::class,'hard_delete'])->name('Events.hard_delete');
+    // Route::get('/search', [EventController::class, 'search'])->name('Events.search');
+    // Route::get('/archive_search', [EventController::class, 'archive_search'])->name('Events.archive_search');
+    // Route::get('/title_search', [EventController::class, 'title_search'])->name('Events.title_search');
+    // Route::get('/archive_title_search', [EventController::class, 'archive_title_search'])->name('Events.archive_title_search');
 });
 
 //info
@@ -134,19 +134,19 @@ Route::prefix('category')->group(function () {
 
 
 //Jobs
-Route::prefix('job')->group(function () {
-    Route::get('/' , [JobController::class,'index'])->name('Jobs.index');
-    Route::get('/archive' , [JobController::class,'archive'])->name('Jobs.archive');
-    Route::get('/create' , [JobController::class, 'create'])->name('Jobs.create');
-    Route::post('/store' , [JobController::class, 'store'])->name('Jobs.store');
-    Route::get('/edit/{id}' , [JobController::class,'edit'])->name('Jobs.edit');
-    Route::post('/update/{id}' , [JobController::class,'update'])->name('Jobs.update');
-    Route::get('/destroy/{id}' , [JobController::class,'soft_delete'])->name('Jobs.soft_delete');
-    Route::get('/restore/{id}' , [JobController::class,'restore'])->name('Jobs.restore');
-    Route::get('/delete/{id}' , [JobController::class,'hard_delete'])->name('Jobs.hard_delete');
-    Route::get('/search', [JobController::class, 'search'])->name('Jobs.search');
-    Route::get('/archive_search', [JobController::class, 'archive_search'])->name('Jobs.archive_search');
-});
+// Route::prefix('job')->group(function () {
+//     Route::get('/' , [JobController::class,'index'])->name('Jobs.index');
+//     Route::get('/archive' , [JobController::class,'archive'])->name('Jobs.archive');
+//     Route::get('/create' , [JobController::class, 'create'])->name('Jobs.create');
+//     Route::post('/store' , [JobController::class, 'store'])->name('Jobs.store');
+//     Route::get('/edit/{id}' , [JobController::class,'edit'])->name('Jobs.edit');
+//     Route::post('/update/{id}' , [JobController::class,'update'])->name('Jobs.update');
+//     Route::get('/destroy/{id}' , [JobController::class,'soft_delete'])->name('Jobs.soft_delete');
+//     Route::get('/restore/{id}' , [JobController::class,'restore'])->name('Jobs.restore');
+//     Route::get('/delete/{id}' , [JobController::class,'hard_delete'])->name('Jobs.hard_delete');
+//     Route::get('/search', [JobController::class, 'search'])->name('Jobs.search');
+//     Route::get('/archive_search', [JobController::class, 'archive_search'])->name('Jobs.archive_search');
+// });
 
 
 Auth::routes();
