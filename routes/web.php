@@ -163,7 +163,7 @@ Route::middleware('auth')->group(function () {
 Route::group(['middleware' => 'auth.admin'], function () {
     Route::get('register_form', [UserController::class, 'register_form'])->name('register_form');
     Route::get('users', [UserController::class, 'index'])->name('users.index');
-    Route::post('update_role/{id}', [UserController::class, 'update_role'])->name('update_role');
+    Route::post('update_role', [UserController::class, 'update_role'])->name('update_role');
 });
 Route::post('/toggle', [UserController::class, 'toggle'])->name('toggle');
 

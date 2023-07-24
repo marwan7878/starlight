@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Auth;
 
 class UserController extends Controller
 {
@@ -17,24 +18,24 @@ class UserController extends Controller
     {
         return view('auth.register');
     }
-    public function update_role($id)
+    public function update_role(Request $request)
     {
-        $user = User::find($id);
+        $id = Auth::id();
+        if($id == $request->id)
+            return response()->json(['status' => false]);
+
+
+        $user = User::find($request->id);
         if($user->role == 'admin')
         {
-            $user->role == 'user';
+            $user->role = 'user';
         }
         else
         {
-            $user->role == 'admin';
+            $user->role = 'admin';
         }
         $user->save();
-        return redirect();
-    }
 
-    public function toggle(Request $request)
-    {
-        // Handle the checkbox toggle logic here
-        return response()->json(['status' => 'success']);
+        return response()->json(['status' => true]);
     }
 }
