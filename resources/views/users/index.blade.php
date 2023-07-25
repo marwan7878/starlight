@@ -51,6 +51,9 @@
                                     @if ($user->role == 'admin')
                                         checked 
                                     @endif
+                                    @if (Auth::id() == $user->id)
+                                        @disabled(true)     
+                                    @endif
                                     >
                                 </td>
                                 
