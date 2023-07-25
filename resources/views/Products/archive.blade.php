@@ -48,7 +48,7 @@
             <td style="max-width:  7rem;word-wrap: break-word;padding-left: 40px;"><p class=" title" style=" overflow-wrap: break-word">{{($product->deleted_at)->format('d/m/Y   h:i:s')}}</p></td>
             <td>
               <a class="btn btn-primary ms-1 py-1" href="{{ route('Products.restore', $product->id) }}">Restore</a>
-              <a class="btn btn-danger ms-1 py-1" href="{{ route('Product.hard_delete', $product->id) }}">Hard delete</a>  
+              <a class="btn btn-danger ms-1 py-1" href="{{ route('Products.hard_delete', $product->id) }}">Hard delete</a>  
             </td>
           </tr>
               

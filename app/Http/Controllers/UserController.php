@@ -36,6 +36,6 @@ class UserController extends Controller
         }
         $user->save();
 
-        return response()->json(['status' => true]);
+        return response()->json($user->role);
     }
 }

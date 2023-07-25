@@ -89,8 +89,7 @@
                 _token: "{{ csrf_token() }}"
             },
             success: function(response) {
-                $('#result').html(response.status);
-                console.log(response.status);
+                console.log(response);
             },
             error: function(xhr) {
                 $('#result').html('An error occurred.');
@@ -99,31 +98,6 @@
             }
         });
     }
-
-//     $(document).ready(function() {
-//     $('#myCheckbox').change(function() {
-//         var isChecked = $(this).prop('checked');
-        
-//         $.ajax({
-//             url: "{{ route('toggle') }}",
-//             method: "POST",
-//             data: {
-//                 isChecked: isChecked,
-//                 _token: "{{ csrf_token() }}"
-//             },
-
-//             success: function(response) {
-//                 $('#result').html(response.status);
-//                 console.log(response.status);
-//             },
-//             error: function(xhr) {
-//                 $('#result').html('An error occurred.');
-//                 console.log(xhr);
-
-//             }
-//         });
-//     });
-// });
 </script>
 
 

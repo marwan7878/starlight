@@ -200,11 +200,13 @@ class ProductController extends Controller
     }
     public function search(Request $request)
     {
-        return $this->description_search($request , 'description' , new Product() , 'Products' , 'products',false,'index');
+        // return $this->description_search($request , 'description' , new Product() , 'Products' , 'products',false,'index');
+        return $this->live_search($request , 'description' , new Product() , 'Products' , 'products',false,'index');
     }
     public function archive_search(Request $request)
     {
-        return $this->description_search($request , 'description' , new Product() , 'Products' , 'products',true,'archive');
+        $ret = $this->description_search($request , 'description' , new Product() , 'Products' , 'products',true,'archive');
+        dd($ret);
     }
     public function title_search(Request $request)
     {

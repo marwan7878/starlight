@@ -1,16 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+<head>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
 
 <div class="p-3">
   <div class="three mb-3 d-flex justify-content-between align-items-center">
     <h1 class="d-inline-block " style="width: 100px">Products</h1>
     
-    <form class="display: flex;justify-content: center;align-items: center;" id="search-form" action="{{route('Products.title_search')}}" method="get">
+    {{-- <form class="display: flex;justify-content: center;align-items: center;" id="search-form" action="{{route('Products.title_search')}}" method="get">
       <input class="mySearch" style="width:10rem;" type="text" name="title" id="search-input" placeholder="ادخل عنوان...">
       <button class="btn btn-outline-secondary py-1" style="border-radius: 12px"  type="submit"><b>بحث</b></button>
-    </form>
-
+    </form> --}}
+    <input type="text" class="mySearch" style="width:10rem;" onchange="liveSearch(this)" >
     
     <form class="display: flex;justify-content: center;align-items: center;" id="search-form" action="{{route('Products.search')}}" method="get">
       <input class="mySearch" style="width:15rem;" type="text" name="description" id="search-input" placeholder="ادخل كلمات بالوصف...">
@@ -19,13 +22,13 @@
     
     
 
-    <form action="{{ route('Products.searchByDate') }}" method="POST">
+    {{-- <form action="{{ route('Products.searchByDate') }}" method="POST">
       @csrf
       <i class="fa-solid fa-calendar-days"></i>
       <input type="date" name="date">
       <button class="btn btn-outline-secondary py-1" style="border-radius: 12px"  type="submit"><b>بحث</b></button>
-    </form>
-    
+    </form> --}}
+
     
 
     <a type="button" class="btn btn-secondary py-2" href="{{ route('Products.archive') }}">Archive</a>
@@ -54,7 +57,30 @@
             </tr>
           </thead>
             <tbody id="tbody">
-              @include('Products.rows')
+
+              @php
+$counter =1;
+@endphp
+@foreach($products as $product)
+<tr style="border-bottom: 1px double #5d657b">
+    <th scope="row" style="color: #2f80ed">{{$counter++}}</th>
+    <td><img src="/images/main/products/{{$product->images[0]}}" alt="error" style="width: 60px"></td>
+
+    
+        <td style="max-width:  11rem;word-wrap: break-word;padding-left: 40px;"><p style=" overflow-wrap: break-word">{{$product->title}}</p></td>
+        <td style="max-width:  11rem;word-wrap: break-word;padding-left: 90px;"><p style=" overflow-wrap: break-word">{{$product->category->name_ar}}</p></td>
+        <td style="max-width:  7rem;word-wrap: break-word;padding-left: 40px;"><p style=" overflow-wrap: break-word">{{($product->created_at)->format('d/m/Y   h:i:s')}}</p></td>
+        <td style="max-width:  7rem;word-wrap: break-word;padding-left: 40px;"><p 
+            style="overflow-wrap: break-word">{{($product->updated_at)->format('d/m/Y   h:i:s')}}</p>
+        </td>
+    
+    <td>
+        <a class="btn btn-secondary ms-1 py-1" href="{{ route('Products.edit', $product->id) }}">Edit</a> 
+        <a class="btn btn-danger ms-1 py-1" href="{{ route('Products.soft_delete', $product->id) }}">Delete</a>  
+    </td>
+</tr>
+@endforeach
+              {{-- @include('Products.rows') --}}
             </tbody>
     </table>  
     <div class="pagination justify-content-center">
@@ -69,20 +95,68 @@
 </div>
 @endsection
 
-<link href="{{ asset('css/fullcalendar.min.css') }}" rel="stylesheet" />
+{{-- <link href="{{ asset('css/fullcalendar.min.css') }}" rel="stylesheet" />
 <script src="{{ asset('js/fullcalendar.min.js') }}"></script>
-<script src="{{ asset('js/daygrid.min.js') }}"></script>
+<script src="{{ asset('js/daygrid.min.js') }}"></script> --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
+  // document.addEventListener('DOMContentLoaded', function() {
+  //   var calendarEl = document.getElementById('calendar');
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      plugins: [ 'dayGrid' ],
-      events: [
-        // Add your calendar events here
-      ]
-    });
+  //   var calendar = new FullCalendar.Calendar(calendarEl, {
+  //     plugins: [ 'dayGrid' ],
+  //     events: [
+  //       // Add your calendar events here
+  //     ]
+  //   });
 
-    calendar.render();
-  });
+  //   calendar.render();
+  // });
+
+
+
+    function liveSearch(input){
+        
+        var input = input.value;
+
+        $.ajax({
+            url: "{{ route('Products.search') }}",
+            method: "GET",
+            data: {
+                input: input,
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(response) {
+              let products = response.products.data; 
+              console.log(products);
+              htmlContent = '   
+@foreach($products as $product)
+<tr style="border-bottom: 1px double #5d657b">
+    <th scope="row" style="color: #2f80ed">{{$counter++}}</th>
+    <td><img src="/images/main/products/{{$product->images[0]}}" alt="error" style="width: 60px"></td>
+
+    
+        <td style="max-width:  11rem;word-wrap: break-word;padding-left: 40px;"><p style=" overflow-wrap: break-word">{{$product->title}}</p></td>
+        <td style="max-width:  11rem;word-wrap: break-word;padding-left: 90px;"><p style=" overflow-wrap: break-word">{{$product->category->name_ar}}</p></td>
+        <td style="max-width:  7rem;word-wrap: break-word;padding-left: 40px;"><p style=" overflow-wrap: break-word">{{($product->created_at)->format('d/m/Y   h:i:s')}}</p></td>
+        <td style="max-width:  7rem;word-wrap: break-word;padding-left: 40px;"><p 
+            style="overflow-wrap: break-word">{{($product->updated_at)->format('d/m/Y   h:i:s')}}</p>
+        </td>
+    
+    <td>
+        <a class="btn btn-secondary ms-1 py-1" href="{{ route('Products.edit', $product->id) }}">Edit</a> 
+        <a class="btn btn-danger ms-1 py-1" href="{{ route('Products.soft_delete', $product->id) }}">Delete</a>  
+    </td>
+</tr>
+@endforeach';
+                $('#tbody').html(htmlContent);
+            },
+            error: function(xhr) {
+                $('#result').html('An error occurred.');
+                console.log(xhr);
+            }
+          });
+    }
+
 </script>
