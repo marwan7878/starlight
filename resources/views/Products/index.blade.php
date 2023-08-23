@@ -13,7 +13,7 @@
       <input class="mySearch" style="width:10rem;" type="text" name="title" id="search-input" placeholder="ادخل عنوان...">
       <button class="btn btn-outline-secondary py-1" style="border-radius: 12px"  type="submit"><b>بحث</b></button>
     </form> --}}
-    <input type="text" class="mySearch" style="width:10rem;" onchange="liveSearch(this)" >
+    <input type="text" class="mySearch" style="width:10rem;" onkeyup="liveSearch(this)" >
     
     <form class="display: flex;justify-content: center;align-items: center;" id="search-form" action="{{route('Products.search')}}" method="get">
       <input class="mySearch" style="width:15rem;" type="text" name="description" id="search-input" placeholder="ادخل كلمات بالوصف...">
@@ -124,33 +124,37 @@ $counter =1;
             url: "{{ route('Products.search') }}",
             method: "GET",
             data: {
-                input: input,
+                column: input,
                 _token: "{{ csrf_token() }}"
             },
             success: function(response) {
-              let products = response.products.data; 
-              console.log(products);
-              htmlContent = '   
-@foreach($products as $product)
-<tr style="border-bottom: 1px double #5d657b">
-    <th scope="row" style="color: #2f80ed">{{$counter++}}</th>
-    <td><img src="/images/main/products/{{$product->images[0]}}" alt="error" style="width: 60px"></td>
+              let products = response.products; 
+              console.log(products[0]);
+
+              var content;
+              for(var i = 0 ; i < products.length ; i++)
+              {
+                var row = `<tr style="border-bottom: 1px double #5d657b">
+    <th scope="row" style="color: #2f80ed">${i+1}</th>
+    <td><img src="/images/main/products/${products[i].images[0]}" alt="error" style="width: 60px"></td>
 
     
-        <td style="max-width:  11rem;word-wrap: break-word;padding-left: 40px;"><p style=" overflow-wrap: break-word">{{$product->title}}</p></td>
-        <td style="max-width:  11rem;word-wrap: break-word;padding-left: 90px;"><p style=" overflow-wrap: break-word">{{$product->category->name_ar}}</p></td>
-        <td style="max-width:  7rem;word-wrap: break-word;padding-left: 40px;"><p style=" overflow-wrap: break-word">{{($product->created_at)->format('d/m/Y   h:i:s')}}</p></td>
+        <td style="max-width:  11rem;word-wrap: break-word;padding-left: 40px;"><p style=" overflow-wrap: break-word">${products[i].title}</p></td>
+        <td style="max-width:  11rem;word-wrap: break-word;padding-left: 90px;"><p style=" overflow-wrap: break-word">${products[i].category}</p></td>
+        <td style="max-width:  7rem;word-wrap: break-word;padding-left: 40px;"><p style=" overflow-wrap: break-word">${products[i].created_at}</p></td>
         <td style="max-width:  7rem;word-wrap: break-word;padding-left: 40px;"><p 
-            style="overflow-wrap: break-word">{{($product->updated_at)->format('d/m/Y   h:i:s')}}</p>
+            style="overflow-wrap: break-word">${products[i].updated_at}</p>
         </td>
-    
     <td>
-        <a class="btn btn-secondary ms-1 py-1" href="{{ route('Products.edit', $product->id) }}">Edit</a> 
-        <a class="btn btn-danger ms-1 py-1" href="{{ route('Products.soft_delete', $product->id) }}">Delete</a>  
+        <a class="btn btn-secondary ms-1 py-1" href="">Edit</a> 
+        <a class="btn btn-danger ms-1 py-1" href="">Delete</a>  
     </td>
 </tr>
-@endforeach';
-                $('#tbody').html(htmlContent);
+                `
+              }
+              content += row;
+                $('#tbody').html(content);
+                
             },
             error: function(xhr) {
                 $('#result').html('An error occurred.');

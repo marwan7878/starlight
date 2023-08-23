@@ -13,7 +13,7 @@
 
     
     <form class="display: flex;justify-content: center;align-items: center;" id="search-form" action="{{route('Products.archive_search')}}" method="get">
-      <input class="mySearch" style="width:15rem;" type="text" name="description" id="search-input" placeholder="ادخل كلمات بالوصف...">
+      <input class="mySearch" style="width:15rem;" type="text" name="description" id="search-input" placeholder="ادخل كلمات     بالوصف...">
       <button class="btn btn-outline-secondary py-1" style="border-radius: 12px"  type="submit"><b>بحث</b></button>
     </form>
 

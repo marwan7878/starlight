@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ApiNewsController;
 use App\Http\Controllers\Api\ApiJobController;
 use App\Http\Controllers\Api\ApiCategoryController;
 use App\Http\Controllers\Api\ApiContactUsController;
+use App\Http\Controllers\Api\ApiProductController;
 use App\Http\Controllers\Api\ApiContentController;
 use App\Http\Controllers\Api\ApiInfoController;
 use App\Http\Controllers\Api\ApiOrderController;
@@ -14,6 +15,7 @@ use App\Models\Content;
 use App\Models\Job;
 use App\Models\Category;
 use App\Models\ContactUs;
+use App\Models\Product;
 use App\Models\Info;
 
 /*
@@ -31,6 +33,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//products
+Route::prefix('products')->group(function () {
+    Route::get('/' , [ApiProductController::class,'index']);
+    Route::get('/show/{id}' , [ApiProductController::class,'show']);
+    Route::get('/search', [ApiProductController::class, 'search']);
+});
 
 //news
 Route::prefix('news')->group(function () {

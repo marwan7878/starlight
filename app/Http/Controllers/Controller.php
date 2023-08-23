@@ -19,6 +19,7 @@ class Controller extends BaseController
         if($description == "")
             return redirect()->route($view.'.'.$page)->with('search_flag',true)->with('search_flag2',false);
         
+        
         $words = explode(" ", $description);
         $flag = false;
         $arr = array();
@@ -39,6 +40,7 @@ class Controller extends BaseController
                 $index = $Model::where($column, 'LIKE', '%'.$words[$i].'%')->pluck('id');
             else
                 $index = $Model::onlyTrashed()->where($column, 'LIKE', '%'.$words[$i].'%')->pluck('id');
+            
             for ($x = 0; $x < count($index); $x++)
             {
                 for ($m = 0; $m < count($ids); $m++)
@@ -59,7 +61,6 @@ class Controller extends BaseController
         
         if($index->count() == 0)
             return view($view.'.'.$page)->with($return_data_name , $index)->with('search_flag',false);
-
         
         $max = 0;
         for($j = 0; $j < count($ids); $j++)
@@ -102,16 +103,27 @@ class Controller extends BaseController
                 ->with('search_flag2' , true)
                 ->with('indecies_of_words',$indecies_of_words);
         }
+        
         return view($view.'.'.$page)->with($return_data_name ,$ret_data)->with('search_flag',true)
-            ->with('search_flag2' , false)
-            ->with('indecies_of_words',$indecies_of_words);
+        ->with('search_flag2' , false)
+        ->with('indecies_of_words',$indecies_of_words);
     }
     public function live_search($request , $column , $Model , $view , $return_data_name , $archive_flag , $page)
     {
-        $description = $request->$column;
-        // if($description == "")
+        $description = $request->column;
+        // return response()->json(['sssss'=> $description , 'ssssss'=> $column]);
+        if($description == "")
+        {
+            if ($archive_flag == false)
+            {
+                $products = $Model::all();
+                return response()->json(['products' => $products ,'search_flag'=>true , 'search_flag2'=>false]);
+
+            }
+            else
+                $products = $Model::onlyTrashed()->get();
+        }
         //     return redirect()->route($view.'.'.$page)->with('search_flag',true)->with('search_flag2',false);
-        
         $words = explode(" ", $description);
         $flag = false;
         $arr = array();
@@ -150,9 +162,9 @@ class Controller extends BaseController
         
         
         
-        // if($index->count() == 0)
-        //     return view($view.'.'.$page)->with($return_data_name , $index)->with('search_flag',false);
-
+        if($index->count() == 0)
+            return ['products' => $index ,'search_flag'=>true];
+            // return view($view.'.'.$page)->with($return_data_name , $index)->with('search_flag',false);
         
         $max = 0;
         for($j = 0; $j < count($ids); $j++)
@@ -180,22 +192,22 @@ class Controller extends BaseController
         {
             $ret_data = $Model::whereIn('id',$index_of_max)
                 ->orderByRaw($Model::raw("FIELD(id, ".implode(",", $index_of_max).")"))
-                ->paginate(10);
+                ->get();
         }
         else
         {
             $ret_data = $Model::onlyTrashed()->whereIn('id',$index_of_max)
                 ->orderByRaw($Model::raw("FIELD(id, ".implode(",", $index_of_max).")"))
-                ->paginate(10);
+                ->get();
         }
 
         if($column == 'title')
         {
             return;
         }
-
-        return ['products' => $ret_data ,'search_flag'=>true ,'search_flag2'=>false,
-        'indecies_of_words'=>$indecies_of_words];
+        
+        return response()->json(['products' => $ret_data ,'search_flag'=>true ,'search_flag2'=>false,
+            'indecies_of_words'=>$indecies_of_words]);
     }
   
 }

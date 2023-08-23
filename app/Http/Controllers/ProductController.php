@@ -205,8 +205,8 @@ class ProductController extends Controller
     }
     public function archive_search(Request $request)
     {
-        $ret = $this->description_search($request , 'description' , new Product() , 'Products' , 'products',true,'archive');
-        dd($ret);
+        // dd(555555);
+        $this->description_search($request , 'description' , new Product() , 'Products' , 'products',true,'archive');
     }
     public function title_search(Request $request)
     {
