@@ -26,7 +26,6 @@ class ApiOrderController extends Controller
         ]);
         if($ret != null)
         {
-            // return response()->json(200);
             return response()->json(200);
         }
         else

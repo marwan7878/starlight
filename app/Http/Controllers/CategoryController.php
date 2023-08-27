@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use File;
 
 class CategoryController extends Controller
 {
@@ -13,12 +14,7 @@ class CategoryController extends Controller
         $categories = Category::latest()->paginate(10);
         return view('Categories.index')->with('categories',$categories);
     }
-    public function archive()
-    {
-        $categories = Category::latest()->onlyTrashed()->paginate(10);
-        return view('Categories.archive')->with('categories',$categories);
-    }
-
+    
     
     public function create()
     {
@@ -29,12 +25,18 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name_ar'=>'required',
-            'name_en'=>'required'
+            'name'=>'required',
+            'image'=>'required'
         ]);
+        $image_name = $request->image->getClientOriginalName();
+        $image_name = time().$image_name;
+        $path = 'images/main/categories';
+        $request->image->move($path,$image_name);
+
+
         Category::create([
-            'name_ar'=>$request->name_ar,
-            'name_en'=>$request->name_en
+            'name'=>$request->name,
+            'image'=> $path.'/'.$image_name
         ]);
         return redirect()->route('category.index');
     }
@@ -49,42 +51,42 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name_ar' => 'required',
-            'name_en' => 'required'
+            'name' => 'required'
         ]);
-        $category = Category::find($id);
-        $category->name_ar = $request->name_ar;
-        $category->name_en = $request->name_en;
+        $category = Category::find($id)->first();
+        $category->name = $request->name;
+
+        if($request->image != null)
+        {
+            $image_path = public_path('images/main/categories/'.$category->image);
+            if(File::exists($image_path))
+                unlink($image_path);
+
+            $image_name = $request->image->getClientOriginalName();
+            $image_name = time().$image_name;
+            $path = 'images/main/categories';
+            $request->image->move($path , $image_name);
+            
+            $category->image = $path.'/'.$image_name;
+        }
+
         $category->save();
 
         return redirect()->route('category.index'); 
     }
     
-    public function soft_delete($id)
+    public function delete($id)
     {
         $category = Category::find($id);    
         $category->delete();
         return redirect()->route('category.index');
     }
 
-    public function restore($id)
-    {
-        $category = Category::withTrashed()->find($id);    
-        $category->restore();
-        return redirect()->route('category.archive');
-    }
-    
-    public function hard_delete($id)
-    {
-        $category = Category::where('id', $id);
-        $category->forceDelete();
-        return redirect()->route('category.archive'); 
-    }
     public function search(Request $request)
     {
         $name = $request->name;
-        $categories = Category::where('name_ar', 'LIKE', '%'.$name.'%')
-            ->orWhere('name_en', 'LIKE', '%'.$name.'%')->paginate(10);
+        $categories = Category::where('name', 'LIKE', '%'.$name.'%')
+            ->paginate(10);
         return view('Categories.index')->with('categories',$categories);
     }
     public function archive_search(Request $request)

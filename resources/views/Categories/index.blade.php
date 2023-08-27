@@ -4,25 +4,23 @@
 
 <div class="p-3">
   <div class="three mb-3 d-flex justify-content-between align-items-center">
-    <h1 class="d-inline-block w-25 ">اقسام الاخبار</h1>
+    <h1 class="d-inline-block w-25 ">Categories</h1>
     
     <form class="d-f justify-content-center align-items-center" id="search-form" action="{{route('category.search')}}" method="get">
       <input class="mySearch" type="text" name="name" id="search-input">
-      <button class="btn btn-outline-secondary py-1" style="border-radius: 12px"  type="submit"><b>بحث</b></button>
+      <button class="btn btn-outline-secondary py-1" style="border-radius: 12px"  type="submit"><b>search</b></button>
     </form>
-  
-    <a type="button" class="btn btn-secondary py-2" href="{{ route('category.archive') }}">الارشيف</a>
   </div>
   @if ($categories->count() > 0)
     <table class="table" id="table">
           <thead style="border-bottom: #2f80ed 3px solid">
             <tr style="color: #2f80ed">
               <th scope="col" style="width: 5rem;">#</th>
-              <th scope="col">الاسم AR</th>
-              <th scope="col">الاسم EN </th>
-              <th scope="col">تاريخ الانشاء</th>
-              <th scope="col">تاريخ التعديل</th>
-              <th scope="col">الخيارات</th>
+              <th scope="col">Image</th>
+              <th scope="col" style="padding-right: 10px">Name</th>
+              <th scope="col">Creation date</th>
+              <th scope="col">Updated date</th>
+              <th scope="col">Settings</th>
             </tr>
           </thead>
           <tbody id="tbody">
@@ -32,13 +30,13 @@
             @foreach ($categories as $category)
             <tr style="border-bottom: 1px double #5d657b">
               <th scope="row" style="color: #2f80ed">{{$counter++}}</th>
-              <td style="max-width:  11rem;word-wrap: break-word;padding-left: 40px;"><p class=" title" style=" overflow-wrap: break-word">{{$category->name_ar}}</p></td>
-              <td style="max-width:  11rem;word-wrap: break-word;padding-left: 40px;"><p class=" title" style=" overflow-wrap: break-word">{{$category->name_en}}</p></td>
-              <td style="max-width:  5rem;word-wrap: break-word;padding-left: 40px;"><p class=" title" style=" overflow-wrap: break-word">{{($category->created_at)->format('d/m/Y   h:i:s')}}</p></td>
-              <td style="max-width:  5rem;word-wrap: break-word;padding-left: 42px;"><p class=" title" style=" overflow-wrap: break-word">{{($category->updated_at)->format('d/m/Y   h:i:s')}}</p></td>
+              <td ><img src="{{$category->image_url}}" alt="error" style="width: 80px;"></td>
+              <td style="max-width:  11rem;word-wrap: break-word;"><p class=" title" style=" overflow-wrap: break-word">{{$category->name}}</p></td>
+              <td style="max-width:  5rem;word-wrap: break-word;"><p class=" title" style=" overflow-wrap: break-word">{{($category->created_at)->format('d/m/Y   h:i:s')}}</p></td>
+              <td style="max-width:  5rem;word-wrap: break-word;"><p class=" title" style=" overflow-wrap: break-word">{{($category->updated_at)->format('d/m/Y   h:i:s')}}</p></td>
               <td>
-                <a class="btn btn-secondary ms-1 py-1" href="{{ route('category.edit', $category->id) }}">تعديل</a> 
-                <a class="btn btn-danger ms-1 py-1" href="{{ route('category.soft_delete', $category->id) }}">حذف</a>  
+                <a class="btn btn-secondary ms-1 py-1" href="{{ route('category.edit', $category->id) }}">Edit</a> 
+                <a class="btn btn-danger ms-1 py-1" href="{{ route('category.delete', $category->id) }}">Delete</a>  
               </td>
             </tr>
                 
@@ -49,7 +47,7 @@
       {{$categories->links()}}
     </div>
   @else
-    <div class="alert alert-danger fw-bold" role="alert">لا يوجد اقسام</div>
+    <div class="alert alert-danger fw-bold" role="alert">No categories are exist!</div>
   @endif
   
 </div>

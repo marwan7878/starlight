@@ -10,10 +10,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class category extends Model
 {
     use HasFactory;
-    use SoftDeletes;
-    protected $dates = ['deleted_at'];
-  
-    protected $fillable = ['name_ar' , 'name_en'];
+    protected $appends = ['image_url'];
+    protected $hidden = ['image'];
+    protected $fillable = ['name' , 'image'];
     
+    public function getImageUrlAttribute()
+    {
+        return url('/').'/'.$this->image;
+    }
     
 }

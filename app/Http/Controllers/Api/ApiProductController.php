@@ -28,9 +28,9 @@ class ApiProductController extends Controller
     }
     public function search(Request $request)
     {
-        $product = Product::where('title', 'LIKE', "%{$request->title}%")
+        $products = Product::where('title', 'LIKE', "%{$request->title}%")
             ->where('category_id' , 'LIKE' , "%{$request->category_id}%")
             ->get();
-        return response()->json($product, 200);
+        return response()->json($products, 200);
     }
 }
