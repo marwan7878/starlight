@@ -20,7 +20,7 @@
 <aside class="sidebar-nav-wrapper" style="left: 0 !important; position: fixed !important;">
     <div class="navbar-logo">
         <a href="{{ route('home') }}">
-            <img src="{{ asset('images/logo/elkenany.png') }}" style="width: 70px" alt="logo"/>
+            <img src="{{ asset('images/logo/starlight.jpg') }}" style="width: 100px" alt="logo"/>
         </a>
     </div>
     <nav class="sidebar-nav">

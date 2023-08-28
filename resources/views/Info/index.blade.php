@@ -6,20 +6,15 @@
   <div class="three mb-3 d-flex justify-content-between align-items-center">
     <h1 class="d-inline-block w-25 ">Company info</h1>
 
-    {{-- <form class="d-f justify-content-center align-items-center" id="search-form" action="{{route('info.search')}}" method="get">
-      <input class="mySearch" type="text" name="description" id="search-input">
-      <button class="btn btn-outline-secondary py-1" style="border-radius: 12px"  type="submit"><b>search</b></button>
-    </form> --}}
-
     <a type="button" class="btn btn-secondary py-2" href="{{ route('info.archive') }}">Archive</a>
   </div>
   @if ($all_info->count() > 0)
     <table class="table" id="table">
           <thead style="border-bottom: #2f80ed 3px solid">
             <tr style="color: #2f80ed">
-              <th scope="col" style="width: 5rem;">#</th>
+              <th scope="col" class="pe-5">#</th>
               <th scope="col">Type</th>
-              <th scope="col">Description</th>
+              <th scope="col" class="ps-5">Description</th>
               <th scope="col">Publish date</th>
               <th scope="col">Modification date</th>
               <th scope="col">Properties</th>
@@ -32,13 +27,13 @@
             @foreach ($all_info as $info)
             <tr style="border-bottom: 1px double #5d657b">
               <th scope="row" style="color: #2f80ed">{{$counter++}}</th>
-              <td style="max-width: 7rem;word-wrap: break-word;padding-left: 40px;"><p class=" title" style=" overflow-wrap: break-word">{{$info->type}}</p></td>
-              <td style="max-width: 11rem;word-wrap: break-word;padding-left: 40px;"><p class=" title" style=" overflow-wrap: break-word;">{{$info->description}}</p></td>
-              <td style="word-wrap: break-word;"><p class=" title" style=" overflow-wrap: break-word; max-width:  7rem;">{{($info->created_at)->format('d/m/Y   h:i:s')}}</p></td>
-              <td style="word-wrap: break-word;"><p class=" title" style=" overflow-wrap: break-word; max-width:  7rem;">{{($info->updated_at)->format('d/m/Y   h:i:s')}}</p></td>
+              <td>{{$info->type}}</td>
+              <td class="ps-5">{{$info->description}}</td>
+              <td>{{($info->created_at)->format('d/m/Y   h:i:s')}}</td>
+              <td>{{($info->updated_at)->format('d/m/Y   h:i:s')}}</td>
 
               <td>
-                <a class="btn btn-secondary ms-1 py-1" href="{{ route('info.edit', $info->id) }}">Modify</a> 
+                <a class="btn btn-secondary ms-1 py-1" href="{{ route('info.edit', $info->id) }}">Edit</a> 
                 <a class="btn btn-danger ms-1 py-1" href="{{ route('info.soft_delete', $info->id) }}">Delete</a>  
               </td>
             </tr>
