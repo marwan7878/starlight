@@ -2,21 +2,14 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\ApiNewsController;
-use App\Http\Controllers\Api\ApiJobController;
+use App\Http\Controllers\Api\ApiEventController;
 use App\Http\Controllers\Api\ApiCategoryController;
 use App\Http\Controllers\Api\ApiContactUsController;
 use App\Http\Controllers\Api\ApiProductController;
 use App\Http\Controllers\Api\ApiContentController;
 use App\Http\Controllers\Api\ApiInfoController;
 use App\Http\Controllers\Api\ApiOrderController;
-use App\Models\News;
-use App\Models\Content;
-use App\Models\Job;
-use App\Models\Category;
-use App\Models\ContactUs;
-use App\Models\Product;
-use App\Models\Info;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,10 +33,10 @@ Route::prefix('products')->group(function () {
 });
 
 //news
-Route::prefix('news')->group(function () {
-    Route::get('/' , [ApiNewsController::class,'index']);
-    Route::get('/show/{id}' , [ApiNewsController::class,'show']);
-    Route::get('/search', [ApiNewsController::class, 'search']);
+Route::prefix('events')->group(function () {
+    Route::get('/' , [ApiEventController::class,'index']);
+    Route::get('/show/{id}' , [ApiEventController::class,'show']);
+    Route::get('/search', [ApiEventController::class, 'search']);
 });
 
 
@@ -52,15 +45,13 @@ Route::prefix('news')->group(function () {
 Route::prefix('categories')->group(function () {
     Route::get('/' , [ApiCategoryController::class,'index']);
     Route::get('/show/{id}' , [ApiCategoryController::class,'show']);
-    Route::get('/search/{id}', [ApiCategoryController::class, 'show']);
 });
 
 
 //infos
 Route::prefix('infos')->group(function () {
     Route::get('/' , [ApiInfoController::class,'index']);
-    Route::get('/show/{id}' , [ApiInfoController::class,'show']);
-    Route::get('/search/{id}', [ApiInfoController::class, 'show']);
+    Route::get('/show' , [ApiInfoController::class,'show']);
 });
 
 // //contactus

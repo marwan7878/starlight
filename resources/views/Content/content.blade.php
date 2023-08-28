@@ -80,30 +80,25 @@
                     @csrf                
                     <div class="col-12">
                         <div class="input-style-1">
-                            <label for="name">الصورة</label>
-                            <img src="{{$content->image_url}}" alt="error" style="width: 200px">
-                            <input type="file" class="file" id="file" name="image">
+                            <label>Image</label>
+                            <img src="{{$content->image_link}}" alt="error" style="width: 200px">
+                            <br><br>
+                            <input type="file" class="file" name="image">
                         </div>
                     </div>
+
 
                     <div class="col-12">
                         <div class="input-style-1">
-                            <label for="description_ar">الوصف</label>
-                            <textarea name="description_ar" class="form-control" rows="6">{{$content->description_ar}}</textarea>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <div class="input-style-1" dir="ltr">
-                            <label for="description_en">Description</label>
-                            <textarea name="description_en" class="form-control" rows="6">{{$content->description_en}}</textarea>
+                            <label>Description</label>
+                            <textarea name="description" class="form-control" rows="6">{{$content->description}}</textarea>
                         </div>
                     </div>
 
                      
                     <div class="col-12">
                         <div class="button-group d-flex justify-content-center flex-wrap">
-                            <input class="main-btn primary-btn btn-hover w-25 text-center" type="submit" value="تعديل">
+                            <input class="main-btn primary-btn btn-hover w-25 text-center" type="submit" value="Update">
                         </div>
                     </div>
                 </form> 

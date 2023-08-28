@@ -15,9 +15,9 @@ class ApiInfoController extends Controller
         return response()->json($all_info, 200);
     }
 
-    public function show($id)
+    public function show(Request $request)
     {
-        $info = Info::where('id' , $id)->first();
+        $info = Info::where('type' , $request->type)->first();
         return response()->json($info, 200);
     }
 }

@@ -1,4 +1,4 @@
-<input type="text" class="mySearch mx-auto d-block" id="mySearch" onkeyup="search(this.value)" placeholder="بحث" title="Type in a category">
+<input type="text" class="mySearch mx-auto d-block" id="mySearch" onkeyup="search(this.value)" placeholder="Search" title="Type in a category">
 <ul>
 
     <li class=" nav-item @if(request()->routeIs('Products.index') || request()->routeIs('Products.archive')) active @else noneactive @endif nav-item-has-children">
@@ -104,13 +104,13 @@
             <li>
                 <a href="{{ route('users.index') }}">
                     <div class="ico w-fit"><i class="fa-solid fa-eye m-0" style="font-size: 14px"></i></div>
-                    عرض
+                    Show
                 </a>
             </li>
             <li>
                 <a href="{{ route('register_form') }}">
                     <div class="ico w-fit"><i class="fa-solid fa-plus m-0" style="font-size: 14px"></i></div>
-                    اضافة
+                    Add
                 </a>
             </li>
         </ul>
@@ -153,7 +153,7 @@
         </a>
         <ul id="ddmenu_8" class="dropdown-nav collapse">
             <li>
-                <a href="{{ route('content.show' ,['page_name' => 'home', 'type' => 'header1']) }}">
+                <a href="{{ route('content.show' ,['page_name' => 'home', 'type' => 'header']) }}">
                     <div class="ico w-fit"><i class="fa-solid fa-page m-0" style="font-size: 14px"></i></div>
                     Header
                 </a>

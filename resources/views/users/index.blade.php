@@ -27,7 +27,7 @@
                     <table class="table striped-table">
                         <thead>
                         <tr>
-                            <th><h6>#</h6></th>
+                            <th class="pe-5"><h6>#</h6></th>
                             <th><h6>Name</h6></th>
                             <th><h6>Email</h6></th>
                             <th><h6>Admin</h6></th>
@@ -37,9 +37,9 @@
                         <tbody>
                         @foreach($users as $user)
                             <tr>
-                                <td>
+                                <th>
                                     <p>{{ $user->id }}</p>
-                                </td>
+                                </th>
                                 <td>
                                     <p>{{ $user->name }}</p>
                                 </td>
