@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('page_name')->default('none');
             $table->string('type')->default('none');
             $table->string('image')->default('none');
-            $table->longtext('description_en')->default('no description');
-            $table->longtext('description_ar')->default('لا يوجد وصف');
+            $table->longtext('description')->default('no description');
             $table->timestamps();
         });
     }

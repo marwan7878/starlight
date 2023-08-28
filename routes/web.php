@@ -154,40 +154,8 @@ Route::prefix('metadata')->group(function () {
     Route::get('/delete/{id}' , [MetaDataPagesController::class,'delete'])->name('metadata.delete');
 });
 
-Route::prefix('contentw')->group(function () {
-    //values of home page
-    Route::get('/home/{value1}' , [ContentController::class,'value'])->name('value1.show');
-    Route::get('/home/{value2}' , [ContentController::class,'value'])->name('value2.show');
-    Route::get('/home/{value3}' , [ContentController::class,'value'])->name('value3.show');
-});
-Route::prefix('contenta')->group(function () {
-    Route::get('/{ourcompanies}/header' , [ContentController::class,'header'])->name('ourcompaniesheader.show');
-    Route::get('/aboutus/ceo' , [ContentController::class,'ceo'])->name('ceo.show');
-    Route::get('/aboutus/mission' , [ContentController::class,'mission'])->name('mission.show');
-    Route::get('/aboutus/vision' , [ContentController::class,'vision'])->name('vision.show');
-    Route::get('/ourcompanies/{activity}' , [ContentController::class,'ourcompanies'])->name('activity.show');
-    Route::get('/ourcompanies/{experience}' , [ContentController::class,'ourcompanies'])->name('experience.show');
-    Route::get('/home/{activity}' , [ContentController::class,'homeactivity'])->name('homeactivity.show');
-    
-});
 
-Route::prefix('contents')->group(function () {
-    //header of pages 
-    Route::get('/{home}/header' , [ContentController::class,'header'])->name('homeheader.show');
-    Route::get('/{aboutus}/header' , [ContentController::class,'header'])->name('aboutusheader.show');
-    Route::get('/{careers}/header' , [ContentController::class,'header'])->name('careersheader.show');
-    Route::post('/{page_name}/header/update' , [ContentController::class,'headerupdate'])->name('pageheader.update');
-    //reasons of careers page
-    Route::get('/careers/{reason1}' , [ContentController::class,'reason'])->name('careersreason1.show');
-    Route::get('/careers/{reason2}' , [ContentController::class,'reason'])->name('careersreason2.show');
-    Route::get('/careers/{reason3}' , [ContentController::class,'reason'])->name('careersreason3.show');
-    //characteristics of aboutus page
-    Route::get('/aboutus/{characteristic1}' , [ContentController::class,'characteristic'])->name('aboutuscharacteristic1.show');
-    Route::get('/aboutus/{characteristic2}' , [ContentController::class,'characteristic'])->name('aboutuscharacteristic2.show');
-    Route::get('/aboutus/{characteristic3}' , [ContentController::class,'characteristic'])->name('aboutuscharacteristic3.show');
-    //be part of our team of careers page
-    Route::get('/ourteam' , [ContentController::class,'ourteam'])->name('careersteam.show');
-    
-    //update
-    Route::post('/{type}/update' , [ContentController::class,'update'])->name('content.update');
+Route::prefix('content')->group(function () {
+    Route::get('/content' , [ContentController::class,'content'])->name('content.show');
+    Route::post('/update' , [ContentController::class,'update'])->name('content.update');
 });

@@ -145,25 +145,29 @@
         </a>
         <ul id="ddmenu_8" class="dropdown-nav collapse">
             <li>
-                <a href="{{ route('homeheader.show' , 'home') }}">
+                <a href="{{ route('content.show' ,['page_name' => 'home', 'type' => 'header1']) }}">
                     <div class="ico w-fit"><i class="fa-solid fa-page m-0" style="font-size: 14px"></i></div>
                     Header
                 </a>
             </li>
             <li>
-                <a href="{{ route('homeactivity.show' , 'activity') }}">
+                <a href="{{ route('content.show' , ['page_name' => 'home', 'type' => 'activity']) }}">
                     <div class="ico w-fit"><i class="fa-solid fa-page m-0" style="font-size: 14px"></i></div>
                     Activity
                 </a>
             </li>
             <li>
-                <a href="{{ route('value1.show' , 'value1') }}">
+                <a href="{{ route('content.show' , ['page_name' => 'home', 'type' => 'value1']) }}">
                     <div class="ico w-fit"><i class="fa-solid fa-page m-0" style="font-size: 14px"></i></div>
                     Values
                 </a>
             </li>
         </ul>
     </li>
+
+
+
+    
     <li class=" nav-item nav-item-has-children">
         <a class="search collapsed"  data-bs-toggle="collapse" data-bs-target="#ddmenu_9"
         aria-controls="ddmenu_9" aria-expanded="true" aria-label="Toggle navigation">
