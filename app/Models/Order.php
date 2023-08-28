@@ -15,8 +15,11 @@ class Order extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
+        'firstname',
+        'lastname',
         'email',
-        'product',
-        'message'
+        'phone',
+        'message',
+        'product'
     ];
 }

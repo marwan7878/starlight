@@ -20,8 +20,8 @@
   <table class="table" id="table">
     <thead style="border-bottom: #2f80ed 3px solid">
       <tr style="color: #2f80ed">
-        <th scope="col" style="width: 7rem;">#</th>
-        <th scope="col">Email</th>
+        <th scope="col" class="pe-5">#</th>
+        <th scope="col">First name</th>
         <th scope="col">Product</th>
         <th scope="col">Send date</th>
         <th scope="col">Properties</th>
@@ -33,12 +33,12 @@
       @endphp
       @foreach ($all_orders as $order)
       <tr class="search2 " style="border-bottom: 1px double #5d657b">
-        <td scope="row" style="color: #2f80ed">{{$counter++}}</td>
-        <td style="max-width: 30px;word-wrap: break-word;padding-left: 40px;"><p class=" title" style=" overflow-wrap: break-word">{{$order->email}}</p></td>
-        <td style="max-width: 30px;word-wrap: break-word;padding-left: 40px;"><p class=" title" style=" overflow-wrap: break-word">{{$order->product}}</p></td>
-        <td ><p class=" title" style=" overflow-wrap: break-word;max-width: 85px;">{{$order->created_at}}</p></td>
+        <th scope="row" style="color: #2f80ed">{{$counter++}}</th>
+        <td>{{$order->firstname}}</p></td>
+        <td>{{$order->product}}</p></td>
+        <td>{{$order->deleted_at}}</p></td>
         <td>
-          <a class="btn btn-secondary ms-1 py-1" href="{{ route('orders.show', $order->id) }}">Show</a> 
+          <a class="btn btn-secondary ms-1 py-1" href="{{ route('orders.restore', $order->id) }}">Restore</a> 
           <a class="btn btn-danger ms-1 py-1" href="{{ route('orders.hard_delete', $order->id) }}">Hard Delete</a>  
         </td>
             @if ($order->read == 0)

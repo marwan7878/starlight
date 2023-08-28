@@ -34,7 +34,7 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
         $order->delete();
-        return redirect()->back();
+        return redirect()->route('orders.index');
     }
 
     public function restore($id)

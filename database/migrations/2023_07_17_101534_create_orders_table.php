@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('email');
+            $table->string('phone');
             $table->string('product');
             $table->string('message');
             $table->boolean('read')->default(false);
