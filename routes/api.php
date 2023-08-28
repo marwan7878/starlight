@@ -35,9 +35,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //products
 Route::prefix('products')->group(function () {
-    Route::get('/' , [ApiProductController::class,'index']);
+    Route::get('/' , [ApiProductController::class,'search']);
     Route::get('/show/{id}' , [ApiProductController::class,'show']);
-    Route::get('/search', [ApiProductController::class, 'search']);
 });
 
 //news
@@ -47,13 +46,6 @@ Route::prefix('news')->group(function () {
     Route::get('/search', [ApiNewsController::class, 'search']);
 });
 
-
-//jobs
-Route::prefix('jobs')->group(function () {
-    Route::get('/' , [ApiJobController::class,'index']);
-    Route::get('/show/{id}' , [ApiJobController::class,'show']);
-    Route::get('/search', [ApiJobController::class, 'search']);
-});
 
 
 //catgories
