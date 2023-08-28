@@ -83,6 +83,14 @@
             <span class="text">Orders</span>
         </a>
     </li>
+    <li class="nav-item @if(request()->routeIs('contactus.index') || request()->routeIs('contactus.archive')) active @endif">
+        <a class="search " href="{{route('contactus.index')}}">
+              <span class="icon">
+                <i class="fa-solid fa-message"></i>
+              </span>
+            <span class="text">Messages</span>
+        </a>
+    </li>
     @if (Auth::check() && Auth::user()->role == 'admin')
     <li class=" nav-item @if(request()->routeIs('users.index') || request()->routeIs('register_form')) active @else noneactive @endif nav-item-has-children">
         <a class="search collapsed"  data-bs-toggle="collapse" data-bs-target="#ddmenu_6"

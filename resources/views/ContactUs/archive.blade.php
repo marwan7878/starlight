@@ -20,11 +20,10 @@
   <table class="table" id="table">
         <thead style="border-bottom: #2f80ed 3px solid">
           <tr style="color: #2f80ed">
-            <th scope="col" style="width:5rem">#</th>
-            <th scope="col" style="width: 7rem;">#</th>
+            <th scope="col" class="pe-5">#</th>
             <th scope="col">First name</th>
-            <th scope="col">Second name</th>
-            <th scope="col">Send date</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Deletion date</th>
             <th scope="col">Properties</th>
           </tr>
         </thead>
@@ -33,12 +32,11 @@
                 $counter =1;
             @endphp
           @foreach ($all_messages as $message)
-          <tr class="search2" style="border-bottom: 1px double #5d657b">
+          <tr style="border-bottom: 1px double #5d657b">
             <th scope="row" style="color: #2f80ed">{{$counter++}}</th>
-            <td style="max-width: 30px;word-wrap: break-word;padding-left: 40px;"><p class=" title" style=" overflow-wrap: break-word">{{$message->first_name}}</p></td>
-            <td style="max-width: 30px;word-wrap: break-word;padding-left: 40px;"><p class=" title" style=" overflow-wrap: break-word">{{$message->second_name}}</p></td>
-            <td ><p class=" title" style=" overflow-wrap: break-word;max-width: 85px;">{{$message->created_at}}</p></td>
-            <td ><p class=" title" style=" overflow-wrap: break-word;max-width: 85px;">{{$message->deleted_at}}</p></td>
+            <td>{{$message->first_name}}</td>
+            <td>{{$message->second_name}}</td>
+            <td>{{$message->deleted_at}}</p></td>
             <td>
               <a class="btn btn-secondary ms-1 py-1" href="{{ route('contactus.restore', $message->id) }}">Restore</a>  
               <a class="btn btn-danger ms-1 py-1" href="{{ route('contactus.hard_delete', $message->id) }}">Hard delete</a> 

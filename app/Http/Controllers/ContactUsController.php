@@ -34,7 +34,7 @@ class ContactUsController extends Controller
     {
         $message = ContactUs::find($id);
         $message->delete();
-        return redirect()->back();
+        return redirect()->route('contactus.index');
     }
 
     public function restore($id)
@@ -44,9 +44,9 @@ class ContactUsController extends Controller
         return redirect()->back();
     }
 
-    public function hardDelete($id)
+    public function hard_delete($id)
     {
-        $message = ContactUs::find($id);
+        $message = ContactUs::onlyTrashed()->find($id);
         $message->forceDelete();
         return redirect()->back();
     }

@@ -7,7 +7,6 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\OrderController;
-// use App\Http\Controllers\JobController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\MetaDataPagesController;
 use App\Http\Controllers\Auth\RegisterController;
