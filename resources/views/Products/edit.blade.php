@@ -3,46 +3,60 @@
 @section('content')
 
 <div class="card-styles">
+  <br>           
+    <div class="col-12 d-flex justify-content-center align-items-center">
+      <h1 class="font-weight-bold" style="color: #0d6efd;">Edit product</h1>
+    </div>
+  <br>
   <div class="card-style-3 mb-30">
       <div class="card-content">            
           <div class="row">
             <form action="{{route('Products.update',$product->id)}}" method="POST" enctype="multipart/form-data">
               @csrf
-
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="title">العنوان</label>
-                  <input type="text" class="form-control" name="title" value="{{$product->title}}" oninput="countCharacters(this,1)">
+                  <label for="title">Title</label>
+                  <input type="text" class="form-control" 
+                    value="{{$product->title}}" name="title" id="name" oninput="countCharacters(this,1)">
                   <div dir="ltr"><span id="1"></span></div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="category_id">القسم</label>
+                  <label for="category_id">Category</label>
                   <select name="category_id" class="form-control w-25">
+                    <option value="{{ $product->category->id }}">{{ $product->category->name }}</option>
                     @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name_ar }}</option>
+                        @if ($category != $product->category)
+                          <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endif
                     @endforeach
                   </select>  
                 </div>
               </div>
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="description">الوصف</label>
-                  <textarea name="description" id="textarea1" oninput="countCharacters(this,2)">{{$product->description}}</textarea>
-                  <div dir="ltr"><span id="2"></span></div>
+                  <label for="shortdescription">Short Description</label>
+                  <textarea name="shortdescription" id="textarea" oninput="countCharacters(this,22)">{{$product->shortdescription}}</textarea>
+                  <div dir="ltr"><span id="22"></span></div>
                 </div>
               </div>
+              <div class="col-12">
+                <div class="input-style-1">
+                  <label for="description">Description</label>
+                  <textarea name="description" id="textarea" rows="4" oninput="countCharacters(this,32)">{{$product->description}}</textarea>
+                  <div dir="ltr"><span id="32"></span></div>
+                </div>
+              </div>
+             
               @php
                   $i=0;
               @endphp
-              @foreach ($product->images as $image)
                 <div class="input-fields">
                   <label class="block">
-                    <img src="/images/main/products/{{$image}}" alt="error" style="width: 200px">
-                    <input type="file" name="images[]"
-                        class="block w-full mt-1 rounded-md"
-                        placeholder="" multiple/>
+                    @foreach ($product->images_url as $image_url)
+                    <img src="{{$image_url}}" alt="error" style="width: 200px">
+                    <input type="file" name="images[]" class="block w-full mt-1 rounded-md" value="">
                   </label>
 
                   <div class="col-12">
@@ -52,14 +66,18 @@
                       <div dir="ltr"><span id="3"></span></div>
                     </div>
                   </div>
+                  @php
+                      $i++
+                  @endphp
+                @endforeach
                 </div>
-                @php
-                    $i++
-                @endphp
-              @endforeach
 
 
-
+              <div class="form-group">
+                <button id="add-more-field" class="btn btn-secondary btn-sm">add more</button>
+              </div>
+              <br>
+              <br>
            
              
               <div class="col-12">
@@ -146,28 +164,37 @@
 </div>
 
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-      tinymce.init({
-        selector: "#textarea1",
-        directionality: 'rtl',
-        plugins:
-          "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss",
-        toolbar:
-          "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
-        tinycomments_mode: "embedded",
-        tinycomments_author: "Author name",
-        mergetags_list: [
-          { value: "First.Name", title: "First Name" },
-          { value: "Email", title: "Email" },
-        ],
-      });
+
 
       function countCharacters(inputField , id) {
         var charCountElement = document.getElementById(id);
         charCountElement.innerText = inputField.value.length;
       }
         
+  $(function(){
+    
+    var more_fields = `
+                    <label class="block">
+                      <span class="text-gray-700">Images</span>
+                      <input type="file" name="images[]" class="block w-full mt-1 rounded-md" >
+                    </label>
+                    <div class="block">
+                      <div class="input-style-1">
+                        <label for="alt_text" dir="ltr">Alt_text</label>
+                        <input type="text" class="form-control" name="alt_text[]" oninput="countCharacters(this,3)">
+                        <div dir="ltr"><span id="3"></span></div>
+                      </div>
+                    </div>
+                `;
+
+    $('#add-more-field').on('click', (function (e) {
+        e.preventDefault();
+        $(".input-fields").append(more_fields);
+    }));
+
+});
     </script>
 @endsection
 

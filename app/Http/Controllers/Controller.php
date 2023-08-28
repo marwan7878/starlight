@@ -111,7 +111,7 @@ class Controller extends BaseController
     public function live_search($request , $column , $Model , $view , $return_data_name , $archive_flag , $page)
     {
         $description = $request->column;
-        // return response()->json(['sssss'=> $description , 'ssssss'=> $column]);
+        
         if($description == "")
         {
             if ($archive_flag == false)

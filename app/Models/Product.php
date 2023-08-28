@@ -12,7 +12,7 @@ class Product extends Model
     use SoftDeletes;
     use HasFactory;
     protected $hidden = ['images'];
-    protected $append = ['images_url'];
+    protected $appends = ['images_url'];
     protected $dates = ['deleted_at'];
     protected $fillable = ['title','images','category_id','shortdescription','description','alt_text','focus_keyword'
                 ,'social_title','social_link','social_image','social_description','social_alt_text'
@@ -26,8 +26,13 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Category');
     }
-    public function getImageUrlAttribute()
+    public function getImagesUrlAttribute()
     {
-        return url('/').'/'.$this->images;
+        $arr=[];
+        foreach($this->images as $image)
+        {
+            array_push($arr , url('/').'/'.$image);
+        }
+        return $arr;
     }
 }

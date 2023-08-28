@@ -11,7 +11,10 @@ class ApiProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with(['category' => function ($query) {
+            $query->select('id','name','image');
+        }])
+        ->get();
         return response()->json($products, 200);
     }
 

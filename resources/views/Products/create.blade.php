@@ -26,15 +26,22 @@
                   <label for="category_id">Category</label>
                   <select name="category_id" class="form-control w-25">
                     @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name_ar }}</option>
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                   </select>  
                 </div>
               </div>
               <div class="col-12">
                 <div class="input-style-1">
+                  <label for="shortdescription">Short Description</label>
+                  <textarea name="shortdescription" id="textarea" oninput="countCharacters(this,22)"></textarea>
+                  <div dir="ltr"><span id="2"></span></div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="input-style-1">
                   <label for="description">Description</label>
-                  <textarea name="description" id="textarea1" oninput="countCharacters(this,2)"></textarea>
+                  <textarea name="description" id="textarea" rows="4" oninput="countCharacters(this,22)"></textarea>
                   <div dir="ltr"><span id="2"></span></div>
                 </div>
               </div>
@@ -61,6 +68,9 @@
               <div class="form-group">
                 <button id="add-more-field" class="btn btn-secondary btn-sm">add more</button>
               </div>
+              <br>
+              <br>
+
               <div class="col-12">
                 <div class="input-style-1">
                   <label for="focus_word" dir="ltr">Focus_keyword</label>
@@ -145,20 +155,7 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-      tinymce.init({
-        selector: "#textarea1",
-        directionality: 'rtl',
-        plugins:
-          "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss",
-        toolbar:
-          "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
-        tinycomments_mode: "embedded",
-        tinycomments_author: "Author name",
-        mergetags_list: [
-          { value: "First.Name", title: "First Name" },
-          { value: "Email", title: "Email" },
-        ],
-      });
+
 
       function countCharacters(inputField , id) {
         var charCountElement = document.getElementById(id);
