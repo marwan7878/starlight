@@ -92,7 +92,6 @@ class EventController extends Controller
         if($request->image != null)
         {
             $image_path = public_path($event->image);
-            // dd($event->image);
             if(File::exists($image_path))
                 unlink($image_path);
 
