@@ -87,7 +87,7 @@ class EventController extends Controller
             'shortdescription' => 'required',
             'description' => 'required'
         ]);
-        $event = Event::find($id)->first();
+        $event = Event::find($id);
         
         if($request->image != null)
         {

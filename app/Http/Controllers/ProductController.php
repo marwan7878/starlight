@@ -103,7 +103,7 @@ class ProductController extends Controller
             'shortdescription' => 'required',
             'description' => 'required',
         ]);
-        $product = Product::find($id)->first();
+        $product = Product::find($id);
         if($request->alt_text != null)
         {
             $images_alt = [];

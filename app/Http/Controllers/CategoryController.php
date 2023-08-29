@@ -51,15 +51,15 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required'
         ]);
-        $category = Category::find($id)->first();
+        $category = Category::find($id);
         $category->name = $request->name;
-
+        
         if($request->image != null)
         {
             $image_path = public_path($category->image);
             if(File::exists($image_path))
-                unlink($image_path);
-
+            unlink($image_path);
+        
             $image_name = $request->image->getClientOriginalName();
             $image_name = time().$image_name;
             $path = 'images/main/categories';
@@ -67,9 +67,9 @@ class CategoryController extends Controller
             
             $category->image = $path.'/'.$image_name;
         }
-
+    
         $category->save();
-
+    
         return redirect()->route('category.index'); 
     }
     
