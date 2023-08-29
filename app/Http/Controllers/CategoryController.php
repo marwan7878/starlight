@@ -15,13 +15,11 @@ class CategoryController extends Controller
         return view('Categories.index')->with('categories',$categories);
     }
     
-    
     public function create()
     {
         return view('Categories.create');
     }
 
-    
     public function store(Request $request)
     {
         $this->validate($request,[
@@ -58,7 +56,7 @@ class CategoryController extends Controller
 
         if($request->image != null)
         {
-            $image_path = public_path('images/main/categories/'.$category->image);
+            $image_path = public_path($category->image);
             if(File::exists($image_path))
                 unlink($image_path);
 
@@ -77,7 +75,10 @@ class CategoryController extends Controller
     
     public function delete($id)
     {
-        $category = Category::find($id);    
+        $category = Category::find($id);
+        $image_path = public_path($category->image);
+        if(File::exists($image_path))
+            unlink($image_path);    
         $category->delete();
         return redirect()->route('category.index');
     }
@@ -89,18 +90,4 @@ class CategoryController extends Controller
             ->paginate(10);
         return view('Categories.index')->with('categories',$categories);
     }
-    public function archive_search(Request $request)
-    {
-        if($request->name == null)
-        {
-            $categories = Category::onlyTrashed()->paginate(10);
-            return view('Categories.archive')->with('categories',$categories);
-        }
-        
-        $name = $request->name;
-        $categories = Category::onlyTrashed()->where('name_ar', 'LIKE', '%'.$name.'%')
-            ->orWhere('name_en', 'LIKE', '%'.$name.'%')->paginate(10);    
-        return view('Categories.archive',compact('categories'));
-    }
-
 }
