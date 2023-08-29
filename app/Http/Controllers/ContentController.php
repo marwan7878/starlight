@@ -24,12 +24,11 @@ class ContentController extends Controller
 
         if($request->image != null)
         {
-            $image_path = public_path('images/content/'.$content->image);
+            $image_path = public_path($content->image);
             if(File::exists($image_path))
                 unlink($image_path);
 
-            $image_name = $request->image->getClientOriginalName();
-            $image_name = time().$image_name;
+            $image_name = time().'image.jpg';
             $path = 'images/content';
             $request->image->move($path , $image_name);
             

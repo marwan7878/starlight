@@ -181,16 +181,51 @@
                     Header
                 </a>
             </li>
+        </ul>
+    </li>
+    <li class=" nav-item nav-item-has-children">
+        <a class="search collapsed"  data-bs-toggle="collapse" data-bs-target="#ddmenu_9"
+        aria-controls="ddmenu_9" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="icon">
+                <i class="fa-solid fa-circle-info"></i>
+            </span>
+            <span class="text">About us</span>
+        </a>
+        <ul id="ddmenu_9" class="dropdown-nav collapse">
             <li>
-                <a href="{{ route('content.show' , ['page_name' => 'home', 'type' => 'activity']) }}">
+                <a href="{{ route('content.show' ,['page_name' => 'aboutus', 'type' => 'header']) }}">
                     <div class="ico w-fit"><i class="fa-solid fa-page m-0" style="font-size: 14px"></i></div>
-                    Activity
+                    Header
                 </a>
             </li>
             <li>
-                <a href="{{ route('content.show' , ['page_name' => 'home', 'type' => 'value1']) }}">
+                <a href="{{ route('content.show' , ['page_name' => 'aboutus', 'type' => 'whoweare']) }}">
                     <div class="ico w-fit"><i class="fa-solid fa-page m-0" style="font-size: 14px"></i></div>
-                    Values
+                    Who we are
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('content.show' , ['page_name' => 'aboutus', 'type' => 'ourvision']) }}">
+                    <div class="ico w-fit"><i class="fa-solid fa-page m-0" style="font-size: 14px"></i></div>
+                    Our vision
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('content.show' , ['page_name' => 'aboutus', 'type' => 'ourmission']) }}">
+                    <div class="ico w-fit"><i class="fa-solid fa-page m-0" style="font-size: 14px"></i></div>
+                    Our Mission
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('content.show' , ['page_name' => 'aboutus', 'type' => 'objectives']) }}">
+                    <div class="ico w-fit"><i class="fa-solid fa-page m-0" style="font-size: 14px"></i></div>
+                    Objectives
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('content.show' , ['page_name' => 'aboutus', 'type' => 'sustainability']) }}">
+                    <div class="ico w-fit"><i class="fa-solid fa-page m-0" style="font-size: 14px"></i></div>
+                    Sustainability
                 </a>
             </li>
         </ul>
