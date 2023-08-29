@@ -8,6 +8,7 @@ use App\Models\Content;
 use App\Models\Info;
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\Product;
 
 
 
@@ -17,9 +18,10 @@ class ApiContentController extends Controller
     {
         $contents = Content::where([['page_name','home']])->get();
         $categories = Category::all();
-        $events = Event::all();
+        $events = Event::select('id','title','shortdescription','image','created_at')->inRandomOrder()->limit(2)->get();
+        
         $data = array();
-
+        
         
         foreach($contents as $content)
         {
@@ -27,14 +29,12 @@ class ApiContentController extends Controller
         }
         foreach($categories as $category)
         {
-            $data['categories'][] = ['id'=>$category->id,'name' => $category->name ,'image' => $category->image_url];
+            $data['categories'][$category->name] = ['id'=>$category->id,'name' => $category->name ,'image' => $category->image_url];
+            $products = Product::where('category_id',$category->id)->select('id','title','shortdescription','images')->limit(4)->get();
+            $data['categories'][$category->name]['products'] = $products;
         }
-        foreach($events as $event)
-        {
-            $data['events'][] = ['id'=>$event->id,'title' => $event->title 
-            ,'image' => $event->image_url , 'shortdescription'=>$event->shortdescription
-            ,'created_at'=>$event->created_at];
-        }
+        $data['events'] =  $events;
+
         return response()->json($data, 200);
     }
     public function aboutus()
