@@ -42,6 +42,7 @@ class ProductController extends Controller
             'shortdescription'=> 'required',
             'description'=> 'required',
         ]);
+        
         $images_name = [];
         $images_alt = [];
         $i = 0;

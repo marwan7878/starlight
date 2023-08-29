@@ -79,10 +79,10 @@ Route::prefix('info')->group(function () {
     Route::get('create' , [InfoController::class, 'create'])->name('info.create');
     Route::post('/store' , [InfoController::class,'store'])->name('info.store');
     Route::get('/edit/{id}' , [InfoController::class,'edit'])->name('info.edit');
-    Route::put('/update/{id}' , [InfoController::class,'update'])->name('info.update');
+    Route::post('/update/{id}' , [InfoController::class,'update'])->name('info.update');
     Route::get('/soft_delete/{id}' , [InfoController::class,'soft_delete'])->name('info.soft_delete');
     Route::get('/restore/{id}' , [InfoController::class,'restore'])->name('info.restore');
-    Route::get('/hard_delete/{id}' , [InfoController::class,'restore'])->name('info.hard_delete');
+    Route::get('/hard_delete/{id}' , [InfoController::class,'hardDelete'])->name('info.hard_delete');
     Route::get('/search' , [InfoController::class,'search'])->name('info.search');
     Route::get('/archive_search' , [InfoController::class,'archive_search'])->name('info.archive_search');
 });

@@ -1,13 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="card-styles">
   <br>           
     <div class="col-12 d-flex justify-content-center align-items-center">
-      <h1 class="font-weight-bold" style="color: #0d6efd;">Edit Event</h1>
+      <h1 class="font-weight-bold" style="color: #0d6efd;">Add Event</h1>
     </div>
-    <br>
+  <br>
+  @if($errors->any())
+    <div class="alert alert-danger fw-bold" role="alert">
+        <h4>{{$errors->first()}}</h4>
+    </div>
+  @endif
     <div class="card-style-3 mb-30">
       <div class="card-content">            
         <div class="row">

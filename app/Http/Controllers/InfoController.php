@@ -36,7 +36,6 @@ class InfoController extends Controller
         else
         {
             $this->validate($request,[
-                'type_index' => 'required',
                 'description' => 'required'
             ]);
 
@@ -48,24 +47,17 @@ class InfoController extends Controller
         }
     }
 
-    
-    public function show($id)
-    {
-        $info = Info::where('id' , $id)->first();
-        return view('Info.show')->with('info' , $info);
-    }
-
-
     public function edit($id)
     {
         $info = Info::where('id' , $id)->first();
-        return view('Info.edit')->with('info',$info);
+        $types = ['--none--' , 'address' , 'email' , 'phone'];
+        return view('Info.edit')->with('info',$info)->with('types',$types);
     }
 
     public function update(Request $request ,$id)
     {
         $request->validate([
-            'title' => 'required',
+            'type' => 'required',
             'description' => 'required'
         ]);
         $info = Info::find($id);
@@ -73,7 +65,7 @@ class InfoController extends Controller
         $info->description = $request->description;
         $info->save();
 
-        return redirect()->route('Info.index'); 
+        return redirect()->route('info.index'); 
     }
 
     public function soft_delete($id)
@@ -92,7 +84,7 @@ class InfoController extends Controller
 
     public function hardDelete($id)
     {
-        $info = Info::find($id);
+        $info = Info::onlyTrashed()->find($id);
         $info->forceDelete();
         return redirect()->back();
     }
