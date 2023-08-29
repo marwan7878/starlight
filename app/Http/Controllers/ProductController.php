@@ -96,11 +96,11 @@ class ProductController extends Controller
     
     public function update(Request $request, $id)
     {
-        // dd($request->images);
         $request->validate([
             'title' => 'required',
             'category_id' => 'required',
-            'description' => 'required'
+            'shortdescription' => 'required',
+            'description' => 'required',
         ]);
         $product = Product::find($id)->first();
         if($request->alt_text != null)
@@ -114,22 +114,35 @@ class ProductController extends Controller
             }
             $product->alt_text = $images_alt;
         }
+
+
         if($request->images != null)
         {
-            $images_name = [];
+            $images_name = $product->images;
+            $i = 0;
+            $image_path = null;
             foreach($request['images'] as $image)
             {
-                $image_path = public_path('images/main/blog/'.$image);
-                if(File::exists($image_path))
-                    unlink($image_path);
-
-                $image_name = $image->getClientOriginalName();
-                $image_name = time().$image_name;
-                $path = 'images/main/products';
-                $image->move($path , $image_name);
-                array_push($images_name , $path.'/'.$image_name);
+                try {
+                    $request['images'][$i];
+                    $image_path = public_path($product->images[$i]);
+                    if(File::exists($image_path))
+                        unlink($image_path);
                 
-                $image = $image_name;
+                    $image_name = $image->getClientOriginalName();
+                    $image_name = time().$image_name;
+                    $path = 'images/main/products';
+                    $image->move($path , $image_name);
+                    $images_name[$i] = $path.'/'.$image_name;
+
+                } catch (\Exception $e) {
+                    $image_name = $image->getClientOriginalName();
+                    $image_name = time().$image_name;
+                    $path = 'images/main/products';
+                    $image->move($path , $image_name);
+                    array_push($images_name , $path.'/'.$image_name);
+                }
+                $i++;
             }
             $product->images = $images_name;
         }
@@ -185,8 +198,8 @@ class ProductController extends Controller
         $product = Product::onlyTrashed()->where('id', $id)->first();
         foreach($product->images as $image)
         {
-            $image_path = public_path($product->image);
-            if(File::exists('images/main/products/'.$image_path)) 
+            $image_path = public_path($image);
+            if(File::exists($image_path))
                 unlink($image_path);
         }
         $social_image_path = public_path('images/social/products/'.$product->social_image);
@@ -198,7 +211,6 @@ class ProductController extends Controller
     }
     public function search(Request $request)
     {
-        // return $this->description_search($request , 'description' , new Product() , 'Products' , 'products',false,'index');
         return $this->live_search($request , 'description' , new Product() , 'Products' , 'products',false,'index');
     }
     public function archive_search(Request $request)

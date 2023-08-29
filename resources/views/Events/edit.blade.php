@@ -3,45 +3,59 @@
 @section('content')
 
 <div class="card-styles">
-  <div class="card-style-3 mb-30">
+  <br>           
+    <div class="col-12 d-flex justify-content-center align-items-center">
+      <h1 class="font-weight-bold" style="color: #0d6efd;">Edit Event</h1>
+    </div>
+    <br>
+    <div class="card-style-3 mb-30">
       <div class="card-content">            
-          <div class="row">
-            <form action="{{route('Events.update',$event->id)}}" method="POST" enctype="multipart/form-data">
+        <div class="row">
+              <form action="{{route('Events.update',$event->id)}}" method="POST" enctype="multipart/form-data">
               @csrf
 
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="title">العنوان</label>
+                  <label>Title</label>
                   <input type="text" class="form-control" name="title" value="{{$event->title}}" oninput="countCharacters(this,1)">
-                  <div dir="ltr"><span id="1"></span></div>
+                  <div><span id="1"></span></div>
                 </div>
               </div>
               
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="description">الوصف</label>
-                  <textarea name="description" id="textarea1" oninput="countCharacters(this,2)">{{$event->description}}</textarea>
-                  <div dir="ltr"><span id="2"></span></div>
+                  <label>Short Description</label>
+                  <textarea name="shortdescription" rows="3" oninput="countCharacters(this,2)">{{$event->shortdescription}}</textarea>
+                  <div><span id="2"></span></div>
                 </div>
               </div>
               
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="name">الصورة</label>
-                  <img src="/images/main/events/{{$event->image}}" alt="error" style="width: 200px">
+                  <label>Description</label>
+                  <textarea name="description" rows="5" oninput="countCharacters(this,3)">{{$event->description}}</textarea>
+                  <div><span id="3"></span></div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="input-style-1">
+                  <img src="{{$event->image_link}}" alt="error" style="width: 200px">
+                  <label>Image</label>
                   <input type="file" class="file" id="file" name="image">
                 </div>
               </div>
+              
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="alt_text" dir="ltr">Alt_text</label>
-                  <input type="text" class="form-control" name="alt_text" value="{{$event->alt_text}}" oninput="countCharacters(this,3)">
-                  <div dir="ltr"><span id="3"></span></div>
+                  <label>Alt text</label>
+                  <input type="text" class="form-control" name="alt_text" value="{{$event->alt_text}}" oninput="countCharacters(this,33)">
+                  <div><span id="33"></span></div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="focus_word" dir="ltr">Focus_keyword</label>
+                  <label>Focus_keyword</label>
                   <input type="text" class="form-control" name="focus_keyword" value="{{$event->focus_keyword}}" oninput="countCharacters(this,4)">
                   <div dir="ltr"><span id="4"></span></div>
                 </div>
@@ -54,21 +68,21 @@
               <br><br>
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="social_title" dir="ltr">Social_title</label>
+                  <label>Social title</label>
                   <input type="text" class="form-control" name="social_title" value="{{$event->social_title}}" oninput="countCharacters(this,15)">
-                  <div dir="ltr"><span id="15"></span></div>
+                  <div><span id="15"></span></div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="social_description" dir="ltr">Social_description</label>
+                  <label>Social description</label>
                   <textarea type="text" class="form-control" rows="3" name="social_description" oninput="countCharacters(this,5)">{{$event->social_description}}</textarea>
-                  <div dir="ltr"><span id="5"></span></div>
+                  <div><span id="5"></span></div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="social_image" dir="ltr">Social_image</label>
+                  <label>Social image</label>
                   @if ($event->social_image != null)
                     <img src="/images/social/events/{{$event->social_image}}" alt="error" style="width: 200px">  
                   @endif
@@ -77,7 +91,7 @@
               </div>
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="social_alt_text" dir="ltr">Social_alt_text</label>
+                  <label>Social_alt_text</label>
                   <input type="text" class="form-control" name="social_alt_text" value="{{$event->social_alt_text}}" oninput="countCharacters(this,6)">
                   <div dir="ltr"><span id="6"></span></div>
                 </div>
@@ -90,7 +104,7 @@
               <br><br>
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="meta_title" dir="ltr">Title_tag</label>
+                  <label>Title_tag</label>
                   <input type="text" class="form-control" name="meta_title" value="{{$event->meta_title}}" oninput="countCharacters(this,7)">
                   <div dir="ltr"><span id="7"></span></div>
                 </div>

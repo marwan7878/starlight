@@ -48,6 +48,29 @@
             </li>
         </ul>
     </li>
+    <li class=" nav-item @if(request()->routeIs('Events.index') || request()->routeIs('Events.archive')) active @else noneactive @endif nav-item-has-children">
+            <a class="search collapsed"  class="" data-bs-toggle="collapse" data-bs-target="#ddmenu_3"
+            aria-controls="ddmenu_3" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="icon">
+                <i class="fa-solid fa-newspaper fa-sm"></i>
+            </span>
+            <span class="text">Events</span>
+        </a>
+        <ul id="ddmenu_3" class="dropdown-nav collapse">
+            <li>
+                <a href="{{ route('Events.index') }}">
+                    <div class="ico w-fit"><i class="fa-solid fa-eye m-0" style="font-size: 14px"></i></div>
+                    Show
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('Events.create') }}">
+                    <div class="ico w-fit"><i class="fa-solid fa-plus m-0" style="font-size: 14px"></i></div>
+                    Add
+                </a>
+            </li>
+        </ul>
+    </li>
    
     
     <li class=" nav-item @if(request()->routeIs('info.index') || request()->routeIs('info.archive')) active @else noneactive @endif nav-item-has-children">
@@ -129,11 +152,11 @@
             <li>
                 <a href="{{route('metadata.index')}}">
                     <div class="ico w-fit"><i class="fa-solid fa-eye m-0" style="font-size: 14px"></i></div>
-                    show
+                    Show
                 </a>
                 <a href="{{route('metadata.create')}}">
                     <div class="ico w-fit"><i class="fa-solid fa-plus m-0" style="font-size: 14px"></i></div>
-                    add
+                    Add
                 </a>
             </li>
         </ul>

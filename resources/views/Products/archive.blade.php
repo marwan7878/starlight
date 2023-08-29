@@ -14,8 +14,8 @@
   <table class="table">
     <thead id="thead" style="border-bottom: #2f80ed 3px solid">
       <tr style="color: #2f80ed">
-        <th scope="col" >#</th>
-        <th scope="col" >Image</th>
+        <th scope="col" class="pe-4" >#</th>
+        <th scope="col">Image</th>
         <th scope="col">Title</th>
         <th scope="col">Category</th>
         <th scope="col">Deletion date</th>

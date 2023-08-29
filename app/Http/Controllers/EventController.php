@@ -35,6 +35,7 @@ class EventController extends Controller
     {
         $this->validate($request , [
             'title'=> 'required',
+            'shortdescription'=> 'required',
             'description'=> 'required',
             'image'=> 'required',
         ]);
@@ -55,8 +56,9 @@ class EventController extends Controller
         
         Event::create([
             'title'=> $request->title,
+            'shortdescription'=> $request->shortdescription,
             'description'=> $request->description,
-            'image'=> $image_name,
+            'image'=> $path.'/'.$image_name,
             'alt_text'=> $request->alt_text,
             'focus_keyword'=> $request->focus_keyword,
 
@@ -82,13 +84,15 @@ class EventController extends Controller
     {
         $request->validate([
             'title' => 'required',
+            'shortdescription' => 'required',
             'description' => 'required'
         ]);
-        $event = Event::find($id);
+        $event = Event::find($id)->first();
         
         if($request->image != null)
         {
-            $image_path = public_path('images/main/events/'.$event->image);
+            $image_path = public_path($event->image);
+            // dd($event->image);
             if(File::exists($image_path))
                 unlink($image_path);
 
@@ -97,10 +101,11 @@ class EventController extends Controller
             $path = 'images/main/events';
             $request->image->move($path , $image_name);
             
-            $event->image = $image_name;
+            $event->image = $path.'/'.$image_name;
         }
         
         $event->title = $request->title;
+        $event->shortdescription = $request->shortdescription;
         $event->description = $request->description;
         $event->focus_keyword = $request->focus_keyword;
         
@@ -149,8 +154,7 @@ class EventController extends Controller
     public function hard_delete($id)
     {
         $event = Event::onlyTrashed()->where('id', $id)->first();
-        
-        $image_path = public_path('images/main/events/'.$event->image);
+        $image_path = public_path($event->image);
         if(File::exists($image_path)) 
             unlink($image_path);
         $social_image_path = public_path('images/social/events/'.$event->social_image);

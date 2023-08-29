@@ -3,6 +3,11 @@
 @section('content')
 
 <div class="card-styles">
+  <br>           
+    <div class="col-12 d-flex justify-content-center align-items-center">
+      <h1 class="font-weight-bold" style="color: #0d6efd;">Add Event</h1>
+    </div>
+  <br>
   <div class="card-style-3 mb-30">
       <div class="card-content">            
           <div class="row">
@@ -11,38 +16,46 @@
 
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="title">Title</label>
-                  <input type="text" class="form-control" name="title" id="name" oninput="countCharacters(this,1)">
-                  <div dir="ltr"><span id="1"></span></div>
+                  <label>Title</label>
+                  <input type="text" class="form-control" name="title" oninput="countCharacters(this,1)">
+                  <div><span id="1"></span></div>
                 </div>
               </div>
               
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="description">Description</label>
-                  <textarea name="description" id="textarea1" oninput="countCharacters(this,2)"></textarea>
-                  <div dir="ltr"><span id="2"></span></div>
+                  <label>Short Description</label>
+                  <textarea name="shortdescription" rows="3" oninput="countCharacters(this,2)"></textarea>
+                  <div><span id="2"></span></div>
                 </div>
               </div>
               
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="name">Image</label>
+                  <label>Description</label>
+                  <textarea name="description" rows="5" oninput="countCharacters(this,3)"></textarea>
+                  <div><span id="3"></span></div>
+                </div>
+              </div>
+              
+              <div class="col-12">
+                <div class="input-style-1">
+                  <label>Image</label>
                   <input type="file" class="file" id="file" name="image">
                 </div>
               </div>
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="alt_text" dir="ltr">Alt_text</label>
-                  <input type="text" class="form-control" name="alt_text" oninput="countCharacters(this,3)">
-                  <div dir="ltr"><span id="3"></span></div>
+                  <label>Alt text</label>
+                  <input type="text" class="form-control" name="alt_text" oninput="countCharacters(this,4)">
+                  <div dir="ltr"><span id="4"></span></div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="focus_word" dir="ltr">Focus_keyword</label>
-                  <input type="text" class="form-control" name="focus_keyword" oninput="countCharacters(this,4)">
-                  <div dir="ltr"><span id="4"></span></div>
+                  <label>Focus_keyword</label>
+                  <input type="text" class="form-control" name="focus_keyword" oninput="countCharacters(this,44)">
+                  <div><span id="44"></span></div>
                 </div>
               </div>
               
@@ -53,30 +66,30 @@
               <br><br>
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="social_title" dir="ltr">Social_title</label>
+                  <label>Social title</label>
                   <input type="text" class="form-control" name="social_title" oninput="countCharacters(this,5)">
-                  <div dir="ltr"><span id="5"></span></div>
+                  <div><span id="5"></span></div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="social_description" dir="ltr">Social_description</label>
+                  <label>Social description</label>
                   <textarea type="text" class="form-control" rows="3" name="social_description" oninput="countCharacters(this,6)"></textarea>
-                  <div dir="ltr"><span id="6"></span></div>
+                  <div><span id="6"></span></div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="social_image" dir="ltr">Social_image</label>
+                  <label>Social image</label>
                   <input type="file" class="file" dir="ltr" name="social_image" oninput="countCharacters(this,7)">
-                  <div dir="ltr"><span id="7"></span></div>
+                  <div><span id="7"></span></div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="social_alt_text" dir="ltr">Social_alt_text</label>
+                  <label>Social alt_text</label>
                   <input type="text" class="form-control" name="social_alt_text" oninput="countCharacters(this,8)">
-                  <div dir="ltr"><span id="8"></span></div>
+                  <div><span id="8"></span></div>
                 </div>
               </div>
               
@@ -87,14 +100,14 @@
               <br><br>
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="meta_title" dir="ltr">Title_tag</label>
+                  <label for="meta_title" dir="ltr">Title tag</label>
                   <input type="text" class="form-control" name="meta_title" oninput="countCharacters(this,9)">
-                  <div dir="ltr"><span id="9"></span></div>
+                  <div><span id="9"></span></div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="meta_link" dir="ltr">Meta_link</label>
+                  <label for="meta_link" dir="ltr">Meta link</label>
                   <input type="text" class="form-control" dir="ltr" name="meta_link" oninput="countCharacters(this,10)">
                   <div><span id="10"></span></div>
                 </div>
@@ -102,9 +115,9 @@
               
               <div class="col-12">
                 <div class="input-style-1">
-                  <label for="Meta_description" dir="ltr">Meta_decription</label>
+                  <label>Meta decription</label>
                   <textarea type="text" class="form-control" rows="3" name="meta_description" oninput="countCharacters(this,11)"></textarea>
-                  <div dir="ltr"><span id="11"></span></div>
+                  <div><span id="11"></span></div>
                 </div>
               </div>
 

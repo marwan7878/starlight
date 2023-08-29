@@ -1,80 +1,115 @@
 @extends('layouts.app')
 
 @section('content')
+<head>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
 
 <div class="p-3">
   <div class="three mb-3 d-flex justify-content-between align-items-center">
     <h1 class="d-inline-block " style="width: 100px">Events</h1>
     
-    {{-- <form class="display: flex;justify-content: center;align-items: center;" id="search-form" action="{{route('Events.title_search')}}" method="get">
-      <input class="mySearch" style="width:10rem;" type="text" name="title" id="search-input" placeholder="ادخل عنوان...">
-      <button class="btn btn-outline-secondary py-1" style="border-radius: 12px"  type="submit"><b>بحث</b></button>
-    </form>
-
+    <input type="text" class="mySearch" style="width:10rem;" onkeyup="liveSearch(this)" placeholder="search">
     
-    <form class="display: flex;justify-content: center;align-items: center;" id="search-form" action="{{route('Events.search')}}" method="get">
-      <input class="mySearch" style="width:15rem;" type="text" name="description" id="search-input" placeholder="ادخل كلمات بالوصف...">
-      <button class="btn btn-outline-secondary py-1" style="border-radius: 12px"  type="submit"><b>بحث</b></button>
-    </form> --}}
-
-    
-      {{-- <span ><i class="fa-solid fa-calendar-days"></i></span> --}}
-      {{-- <input type="date" class="form-control"> --}}
     
 
     <a type="button" class="btn btn-secondary py-2" href="{{ route('Events.archive') }}">Archive</a>
   </div>
   @if ($events->count() > 0)
     <table class="table" id="table">
-          <thead style="border-bottom: #2f80ed 3px solid">
+          <thead id="thead" style="border-bottom: #2f80ed 3px solid">
             <tr style="color: #2f80ed">
-            @if ($search_flag == true && $search_flag2 == true)
-              <th scope="col" style="width: 5rem;">#</th>
-              <th scope="col" style="width: 8rem;">Image</th>
+              <th scope="col" class="pe-4">#</th>
+              <th scope="col">Image</th>
               <th scope="col">Title</th>
+              {{-- <th scope="col">Description</th> --}}
               <th scope="col">Publish date</th>
               <th scope="col">Modification date</th>
               <th scope="col">Properties</th>
-            @else
-              <th scope="col" style="width: 5rem;">#</th>
-              <th scope="col" style="width: 8rem;">Image</th>
-              <th scope="col">Title</th>
-              <th scope="col">الوصف</th>
-              <th scope="col">تاريخ الانشاء</th>
-              <th scope="col">الخيارات</th>
-            @endif
             </tr>
           </thead>
             <tbody id="tbody">
-              @include('Events.rows')
+              @php
+                $counter =1;
+              @endphp
+              @foreach($events as $event)
+              <tr style="border-bottom: 1px double #5d657b">
+                  <th scope="row" style="color: #2f80ed">{{$counter++}}</th>
+                  <td><img src="{{$event->image_link}}" alt="error" style="width: 60px"></td>
+                  <td>{{$event->title}}</td>
+                  {{-- <td style="max-width: 120px;">{{$event->shortdescription}}</td> --}}
+                  <td>{{($event->created_at)->format('d/m/Y   h:i:s')}}</td>
+                  <td>{{($event->updated_at)->format('d/m/Y   h:i:s')}}</td>
+                  <td>
+                      <a class="btn btn-secondary ms-1 py-1" href="{{ route('Events.edit', $event->id) }}">Edit</a> 
+                      <a class="btn btn-danger ms-1 py-1" href="{{ route('Events.soft_delete', $event->id) }}">Delete</a>  
+                  </td>
+              </tr>
+              @endforeach
             </tbody>
-    </table>  
-    <div class="pagination justify-content-center">
-      {{$events->links()}}
-    </div>
-    @else
-    <div class="alert alert-danger fw-bold" role="alert">There aren't Events</div>
-    @endif
-    
-  </div>
+          </table>  
+          <div class="pagination justify-content-center">
+            {{$events->links()}}
+          </div>
+          @else
+          <div class="alert alert-danger fw-bold" role="alert">No events are exist!</div>
+          @endif
+        </div>
+      </div>
+      @endsection
 
-</div>
-@endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<link href="{{ asset('css/fullcalendar.min.css') }}" rel="stylesheet" />
-<script src="{{ asset('js/fullcalendar.min.js') }}"></script>
-<script src="{{ asset('js/daygrid.min.js') }}"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      plugins: [ 'dayGrid' ],
-      events: [
-        // Add your calendar events here
-      ]
-    });
+    function liveSearch(input){
+        
+        var input = input.value;
 
-    calendar.render();
-  });
+        $.ajax({
+            url: "{{ route('Events.search') }}",
+            method: "GET",
+            data: {
+                column: input,
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(response) {
+              let events = response.events; 
+              console.log(events[0]);
+
+              var content;
+              for(var i = 0 ; i < events.length ; i++)
+              {
+                var row = `<tr style="border-bottom: 1px double #5d657b">
+              <th scope="row" style="color: #2f80ed">${i+1}</th>
+                <td><img src="${events[i].images_url[0]}" alt="error" style="width: 60px"></td>
+                <td>${events[i].title}</td>
+                <td style="padding-left:30px;padding-right:30px; max-width:20px;">${events[i].shortdescription}</td>
+              <td>
+                <a class="btn btn-secondary ms-1 py-1" href="/events/edit/${events[i].id}">Edit</a> 
+                <a class="btn btn-danger ms-1 py-1" href="/events/destroy/${events[i].id}">Delete</a>  
+              </td>
+              </tr>
+                `
+              }
+              content += row;
+                $('#tbody').html(content);
+              header = `<tr style="color: #2f80ed">
+                <th scope="col" style="width: 5rem;">#</th>
+                <th scope="col" style="width: 8rem;">Image</th>
+                <th scope="col">Title</th>
+                <th scope="col" style="padding-left:30px;">Description</th>
+                <th scope="col">Properties</th>
+                <tr>
+              `
+                $('#thead').html(header);
+                
+            },
+            error: function(xhr) {
+                $('#result').html('An error occurred.');
+                console.log(xhr);
+            }
+          });
+    }
+
 </script>

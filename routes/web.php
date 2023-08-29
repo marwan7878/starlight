@@ -55,7 +55,7 @@ Route::prefix('products')->group(function () {
 
 
 //
-Route::prefix('event')->group(function () {
+Route::prefix('events')->group(function () {
     Route::get('/' , [EventController::class,'index'])->name('Events.index');
     Route::get('/archive' , [EventController::class,'archive'])->name('Events.archive');
     Route::get('/create' , [EventController::class, 'create'])->name('Events.create');
@@ -66,7 +66,7 @@ Route::prefix('event')->group(function () {
     Route::get('/destroy/{id}' , [EventController::class,'soft_delete'])->name('Events.soft_delete');
     Route::get('/restore/{id}' , [EventController::class,'restore'])->name('Events.restore');
     Route::get('/delete/{id}' , [EventController::class,'hard_delete'])->name('Events.hard_delete');
-    // Route::get('/search', [EventController::class, 'search'])->name('Events.search');
+    Route::get('/search', [EventController::class, 'search'])->name('Events.search');
     // Route::get('/archive_search', [EventController::class, 'archive_search'])->name('Events.archive_search');
     // Route::get('/title_search', [EventController::class, 'title_search'])->name('Events.title_search');
     // Route::get('/archive_title_search', [EventController::class, 'archive_title_search'])->name('Events.archive_title_search');
