@@ -29,11 +29,12 @@ class ApiContentController extends Controller
         }
         foreach($categories as $category)
         {
-            $data['categories'][$category->name] = ['id'=>$category->id,'name' => $category->name ,'image' => $category->image_url];
+            $data['products'][$category->name] = ['id'=>$category->id,'name' => $category->name];
             $products = Product::where('category_id',$category->id)->select('id','title','shortdescription','images')->limit(4)->get();
-            $data['categories'][$category->name]['products'] = $products;
+            $data['products'][$category->name]['products'] = $products;
         }
         $data['events'] =  $events;
+        $data['categories'] =  $categories;
 
         return response()->json($data, 200);
     }
