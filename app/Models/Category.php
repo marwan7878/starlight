@@ -19,4 +19,8 @@ class category extends Model
         return url('/').'/'.$this->image;
     }
     
+    public function products(){
+        return $this->hasMany('App\Models\Product');
+
+    }
 }

@@ -18,6 +18,7 @@ class ApiContentController extends Controller
     {
         $contents = Content::where([['page_name','home']])->get();
         $categories = Category::all();
+        $categories_products = Category::with('products')->inRandomOrder()->take(3)->get();
         $events = Event::select('id','title','shortdescription','image','created_at')->inRandomOrder()->limit(2)->get();
         
         $data = array();
@@ -27,11 +28,21 @@ class ApiContentController extends Controller
         {
             $data[$content->type] = ['image' => $content->image_link ,'desc' => $content->description];
         }
+
         foreach($categories as $category)
         {
-            $data['categories'][$category->name] = ['id'=>$category->id,'name' => $category->name ,'image' => $category->image_url];
-            $products = Product::where('category_id',$category->id)->select('id','title','shortdescription','images')->limit(4)->get();
-            $data['categories'][$category->name]['products'] = $products;
+            $data['categories'][] = ['id'=>$category->id,'name' => $category->name ,'image' => $category->image_url];
+        }
+        foreach($categories_products as $category)
+        {
+            $data['categories_products'][] = [
+                'id'=>$category->id,
+                'name' => $category->name ,
+                'image' => $category->image_url,
+                'products' => $category->products->take(4)
+            ];
+            // $products = Product::where('category_id',$category->id)->select('id','title','shortdescription','images')->limit(4)->get();
+            // $data['categories_products']['products'][] = $category->products;
         }
         $data['events'] =  $events;
 
@@ -49,7 +60,7 @@ class ApiContentController extends Controller
         }
         foreach($all_info as $info)
         {
-            $data['info'][] = ['type' => $info->type ,'desc' => $info->description];
+            $data['info'][$info->type] =  $info->description;
         }
         return response()->json($data, 200);
     }
