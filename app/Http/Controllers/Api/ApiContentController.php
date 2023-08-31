@@ -45,6 +45,7 @@ class ApiContentController extends Controller
             // $data['categories_products']['products'][] = $category->products;
         }
         $data['events'] =  $events;
+        $data['categories'] =  $categories;
 
         return response()->json($data, 200);
     }
