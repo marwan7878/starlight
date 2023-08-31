@@ -18,7 +18,7 @@ class ApiContentController extends Controller
     {
         $contents = Content::where([['page_name','home']])->get();
         $categories = Category::all();
-        $categories_products = Category::with('products')->inRandomOrder()->take(3)->get();
+        $categories_products = Category::with('products')->inRandomOrder()->get();
         $events = Event::select('id','title','shortdescription','image','created_at')->inRandomOrder()->limit(2)->get();
         
         $data = array();
