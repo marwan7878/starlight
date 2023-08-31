@@ -17,19 +17,21 @@ class ApiProductController extends Controller
     }
     public function search(Request $request)
     {
+        $categories = Category::all();
         if($request->title == null && $request->category_id == null)
         {
             $products = Product::all();
-            return response()->json($products, 200);
+            return response()->json(['categories'=>$categories , 'products'=>$products], 200);
         }    
         if($request->title == null && $request->category_id != null)
         {
             $products = Product::where('category_id' , 'LIKE' , "%{$request->category_id}%")->get();
-            return response()->json($products, 200);
+            return response()->json(['categories'=>$categories , 'products'=>$products], 200);
         }
         $products = Product::where('title', 'LIKE', "%{$request->title}%")
             ->where('category_id' , 'LIKE' , "%{$request->category_id}%")
             ->get();
-        return response()->json($products, 200);
+
+        return response()->json(['categories'=>$categories , 'products'=>$products], 200);
     }
 }
