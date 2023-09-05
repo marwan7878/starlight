@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\ApiProductController;
 use App\Http\Controllers\Api\ApiContentController;
 use App\Http\Controllers\Api\ApiInfoController;
 use App\Http\Controllers\Api\ApiOrderController;
-
+use App\Http\Middleware\SanitizeInput;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,10 +55,10 @@ Route::prefix('infos')->group(function () {
 });
 
 // //contactus
-Route::post('contactus/store' , [ApiContactUsController::class,'store']);
+Route::post('contactus/store' , [ApiContactUsController::class,'store'])->middleware(SanitizeInput::class);
 
 //order
-Route::post('order/store' , [ApiOrderController::class,'store']);
+Route::post('order/store' , [ApiOrderController::class,'store'])->middleware(SanitizeInput::class);
 
 
 //aboutus

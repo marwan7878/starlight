@@ -13,11 +13,11 @@ class ApiOrderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
+            'name' => 'required|string',
+            'email' => 'required|string|email',
+            'phone' => 'required|string',
             'product_id' => 'required',
-            'message' => 'required',
+            'message' => 'required|string',
         ]);
         $product = Product::where('id',$request->product_id)->first();
         
