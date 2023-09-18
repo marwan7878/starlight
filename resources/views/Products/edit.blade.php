@@ -116,7 +116,7 @@
                 <div class="input-style-1">
                   <label for="social_image" dir="ltr">Social_image</label>
                   @if ($product->social_image != null)
-                    <img src="/images/social/news/{{$event->social_image}}" alt="error" style="width: 200px">  
+                    <img src="{{url('/').'/'.$product->social_image}}" alt="error" style="width: 200px">  
                   @endif
                   <input type="file" class="file" name="social_image">
                 </div>

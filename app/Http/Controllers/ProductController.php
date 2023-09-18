@@ -159,15 +159,15 @@ class ProductController extends Controller
         $product->social_description = $request->social_description;
         if($request->social_image != null)
         {
-            $image_path = public_path('images/social/news/'.$event->social_image);
-            if(File::exists($image_path) && $event->social_image != null )
+            $image_path = public_path($product->social_image);
+            if(File::exists($image_path) && $product->social_image != null )
                 unlink($image_path);
-
+            
             $social_image_name = $request->social_image->getClientOriginalName();
             $social_image_name = time().$social_image_name;
             $path = 'images/social/news';
             $request->social_image->move($path , $social_image_name);
-            $product->social_image = $social_image_name;
+            $product->social_image = $path.'/'.$social_image_name;
         }
         $product->social_alt_text = $request->social_alt_text;
         
