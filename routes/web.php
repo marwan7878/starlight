@@ -34,7 +34,7 @@ Route::get('/error', function () {
 })->name('error_page');
 
 
-//News
+//products
 Route::prefix('products')->group(function () {
     Route::get('/' , [ProductController::class,'index'])->name('Products.index');
     Route::get('/archive' , [ProductController::class,'archive'])->name('Products.archive');
@@ -54,7 +54,7 @@ Route::prefix('products')->group(function () {
 });
 
 
-//
+//news
 Route::prefix('events')->group(function () {
     Route::get('/' , [EventController::class,'index'])->name('Events.index');
     Route::get('/archive' , [EventController::class,'archive'])->name('Events.archive');

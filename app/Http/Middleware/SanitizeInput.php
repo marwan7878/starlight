@@ -20,8 +20,8 @@ class SanitizeInput
 
         // Loop through all input fields and sanitize them
         foreach ($inputData as $key => $value) {
-            $inputData[$key] = strip_tags($value);
-            $inputData[$key] = htmlspecialchars($value);
+            // $inputData[$key] = strip_tags($value);
+            // $inputData[$key] = htmlspecialchars($value);
             $inputData[$key] = preg_replace('/[^a-zA-Z0-9\s@.+-]/' , '', $value);
         }
 
