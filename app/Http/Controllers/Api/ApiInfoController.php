@@ -11,8 +11,11 @@ class ApiInfoController extends Controller
 {
     public function index()
     {
-        $all_info = Info::all();
-        return response()->json($all_info, 200);
+        $all_info = Info::get();
+        foreach($all_info as $info){
+            $data[$info->type] = $info->description;
+        }
+        return response()->json($data, 200);
     }
 
     public function show(Request $request)

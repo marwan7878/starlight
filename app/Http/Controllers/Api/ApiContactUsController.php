@@ -27,11 +27,11 @@ class ApiContactUsController extends Controller
         ]);
         if($ret != null)
         {
-            return response()->json(200);
+            return response()->json(['message'=> 'Form sent successfully'],200);
         }
         else
         {
-            return response()->json(404);
+            return response()->json(['message'=> 'Error in sending'],404);
         }
     }
 

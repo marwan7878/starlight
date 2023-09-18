@@ -13,18 +13,16 @@ class ApiOrderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
+            'name' => 'required|string',
+            'email' => 'required|string|email',
+            'phone' => 'required|string',
             'product_id' => 'required',
-            'message' => 'required',
+            'message' => 'required|string',
         ]);
         $product = Product::where('id',$request->product_id)->first();
         
         $ret = Order::create([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
+            'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'product' => $product->title,
@@ -32,11 +30,11 @@ class ApiOrderController extends Controller
         ]);
         if($ret != null)
         {
-            return response()->json(200);
+            return response()->json(['message'=> 'Form sent successfully'],200);
         }
         else
         {
-            return response()->json(404);
+            return response()->json(['message'=> 'Error in sending'],404);
         }
     }
 
