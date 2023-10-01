@@ -18,7 +18,7 @@ class MetaDataController extends Controller
                 $q->where('name', 'LIKE', '%' . request('category') . '%');
             });
         }
-        $metaData = $metaData->get();
+        $metaData = $metaData->with('category')->get();
 
         return response()->json(MetaDataResource::collection($metaData), 200);
 

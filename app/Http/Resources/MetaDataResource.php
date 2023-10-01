@@ -24,7 +24,12 @@ class MetaDataResource extends JsonResource
                 'link'=>$this->link,
                 'photo'=>$this->image_url,
                 'alt'=>$this->alt
-            ]
+            ],
+            'category'=> $this->category ? [
+                'id' => $this->category->id,
+                'name' => $this->category->name,
+                'description' => $this->category->description
+            ] : null
         ];
     }
 }
