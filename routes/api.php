@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\ApiContentController;
 use App\Http\Controllers\Api\ApiInfoController;
 use App\Http\Controllers\Api\ApiOrderController;
 use App\Http\Middleware\SanitizeInput;
-
+use App\Http\Controllers\Api\MetaDataController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -66,3 +66,5 @@ Route::get('/content/aboutus' , [ApiContentController::class,'aboutus']);
 
 //home
 Route::get('/content/home' , [ApiContentController::class,'home']);
+
+Route::get('/meta_data',[MetaDataController::class,'index']);

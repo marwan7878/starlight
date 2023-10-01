@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\category;
 use App\Models\Meta_data_pages;
 use Illuminate\Http\Request;
 
@@ -12,56 +13,66 @@ class MetaDataPagesController extends Controller
         $Meta_data = Meta_data_pages::paginate(10);
         return view('MetaData.index',compact('Meta_data'));
     }
-    
+
     public function create()
     {
-        return view('MetaData.create');
+        $categories = category::all();
+        return view('MetaData.create',compact('categories'));
     }
 
     public function store(Request $request)
     {
         $this->validate($request,[
-            'meta_title'=>'required',
-            'meta_link'=>'required',
-            'meta_description'=>'required'
+            'title'=>'required',
+            'link'=>'required',
+            'description'=>'required'
         ]);
-        Meta_data_pages::create([
-            'title'=> $request->meta_title,
-            'link'=> $request->meta_link,
-            'description'=> $request->meta_decription
-        ]);
+        $input = $request->all();
+        if($request->hasFile('image')){
+            $image_name = $request->file('image')->getClientOriginalName();
+            $image_name = time().$image_name;
+            $path = 'images/'.Meta_data_pages::IMAGE_PATH;
+            $request->image->move($path,$image_name);
+            $input['image'] = $path.'/'.$image_name;
+        }
+        Meta_data_pages::create($input);
         return redirect()->route('metadata.index');
     }
 
-   
+
     public function edit($id)
     {
         $metadata = Meta_data_pages::where('id' , $id)->first();
-        return view('MetaData.edit',compact('metadata'));
+        $categories = category::all();
+        return view('MetaData.edit',compact('metadata','categories'));
     }
-    
+
     public function update(Request $request,$id)
     {
         $request->validate([
-            'meta_title'=>'required',
-            'meta_link'=>'required',
-            'meta_description'=>'required'
+            'title'=>'required',
+            'link'=>'required',
+            'description'=>'required'
         ]);
+        $input = $request->all();
+        if($request->hasFile('image')){
+            $image_name = $request->file('image')->getClientOriginalName();
+            $image_name = time().$image_name;
+            $path = 'images/'.Meta_data_pages::IMAGE_PATH;
+            $request->image->move($path,$image_name);
+            $input['image'] = $path.'/'.$image_name;
+        }
         $metadata = Meta_data_pages::find($id);
-        
-        $metadata->title = $request->meta_title;
-        $metadata->link = $request->meta_link;
-        $metadata->description = $request->meta_description;
-        
-        $metadata->save();
-        
+
+        $metadata->update($input);
+
         return redirect()->route('metadata.index');
     }
-    
+
     public function delete($id)
     {
         $metadata = Meta_data_pages::where('id' , $id)->first();
         $metadata->delete();
-        return redirect()->back(); 
+        return redirect()->back();
     }
 }
