@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class category extends Model
+class Category extends Model
 {
     use HasFactory;
     protected $appends = ['image_url'];

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\category;
+use App\Models\Category;
 use App\Models\Meta_data_pages;
 use Illuminate\Http\Request;
 
@@ -16,7 +16,7 @@ class MetaDataPagesController extends Controller
 
     public function create()
     {
-        $categories = category::all();
+        $categories = Category::all();
         return view('MetaData.create',compact('categories'));
     }
 
